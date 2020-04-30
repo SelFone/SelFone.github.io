@@ -1,8 +1,8 @@
 <html>
   <head>
-    <meta charset="utf-8" />
+  <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>浅拷贝和深拷贝 | Gridea</title>
+<title>JavaScript | Gridea</title>
 <meta name="description" content="温故而知新" />
 <link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588214765130">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -70,73 +70,88 @@
   </div>
 </div>
 
-        <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              浅拷贝和深拷贝
-            </h2>
-            <div class="post-info">
-              <span>
-                2020-04-30
-              </span>
-              <span>
-                1 min read
-              </span>
-              
-                <a href="http://toolman.live/tag/u1jSvmmAc/" class="post-tag">
-                  # JavaScript
-                </a>
-              
-            </div>
-            
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>知识基础：栈堆，基本数据类型与引用数据类型;<br>
-• 基本类型--名值存储在栈内存中<br>
-• 引用数据类型--名存在栈内存中，值存在于堆内存中，但是栈内存会提供一个引用的地址指向堆内存中的值<br>
-function deepClone(obj){<br>
-let objClone = Array.isArray(obj)?[]:{};<br>
-if(obj &amp;&amp; typeof obj===&quot;object&quot;){<br>
-for(let key in obj){<br>
-if(obj.hasOwnProperty(key)){<br>
-//判断ojb子元素是否为对象，如果是，递归复制<br>
-if(obj[key] &amp;&amp; typeof obj[key] ===&quot;object&quot;){<br>
-objClone[key] = deepClone(obj[key]);<br>
-}else{<br>
-//如果不是，简单复制<br>
-objClone[key] = obj[key];<br>
-}<br>
-}<br>
-}<br>
-}<br>
-return objClone;<br>
-}</p>
-<p>let a=[0,1,[2,3],4],<br>
-b=deepClone(a);<br>
-a[0]=1;<br>
-a[2][0]=1;<br>
-console.log(a,b);</p>
-
-              </div>
-              <div class="toc-container">
-                
-              </div>
-            </div>
-          </article>
+        <div class="current-tag-container">
+            <h2 class="title">
+                标签：# JavaScript
+            </h2> 
         </div>
+        <div class="post-container">
+  
+    <article class="post">
+      <a href="http://toolman.live/post/zheng-ze-biao-da-shi/">
+        <h2 class="post-title">正则表达式</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-30
+        </span>
+        <span>
+          12 min read
+        </span>
+        
+          <a href="http://toolman.live/tag/u1jSvmmAc/" class="post-tag">
+            # JavaScript
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="http://toolman.live/post/qian-kao-bei-he-shen-kao-bei/">
+        <h2 class="post-title">浅拷贝和深拷贝</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-30
+        </span>
+        <span>
+          1 min read
+        </span>
+        
+          <a href="http://toolman.live/tag/u1jSvmmAc/" class="post-tag">
+            # JavaScript
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+    <article class="post">
+      <a href="http://toolman.live/post/js-zhi-this-he-callapplybind/">
+        <h2 class="post-title">JS 之 this和call、apply、bind</h2>
+      </a>
+      <div class="post-info">
+        <span>
+          2020-04-30
+        </span>
+        <span>
+          4 min read
+        </span>
+        
+          <a href="http://toolman.live/tag/u1jSvmmAc/" class="post-tag">
+            # JavaScript
+          </a>
+        
+      </div>
+      
+      <div class="post-abstract">
+        
+      </div>
+    </article>
+  
+</div>
 
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="http://toolman.live/post/js-zhi-this-he-callapplybind/">
-              <h3 class="post-title">
-                JS 之 this和call、apply、bind
-              </h3>
-            </a>
-          </div>
-        
-
-        
+        <div class="pagination-container">
+  
+  
+</div>
 
         <div class="site-footer">
   Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | 
