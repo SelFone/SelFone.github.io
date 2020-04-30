@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://toolman.live</id>
     <title>Gridea</title>
-    <updated>2020-04-30T02:27:40.938Z</updated>
+    <updated>2020-04-30T02:35:08.959Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://toolman.live"/>
     <link rel="self" href="http://toolman.live/atom.xml"/>
@@ -11,30 +11,961 @@
     <icon>http://toolman.live/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[opp]]></title>
-        <id>http://toolman.live/post/opp/</id>
-        <link href="http://toolman.live/post/opp/">
+        <title type="html"><![CDATA[JS面试题-基础]]></title>
+        <id>http://toolman.live/post/js-mian-shi-ti-ji-chu/</id>
+        <link href="http://toolman.live/post/js-mian-shi-ti-ji-chu/">
         </link>
-        <updated>2020-04-30T02:26:59.000Z</updated>
-        <content type="html"><![CDATA[<p>呃呃</p>
+        <updated>2020-04-30T02:34:05.000Z</updated>
+        <content type="html"><![CDATA[<p>JS基础知识</p>
+<ol>
+<li>【变量提升】下面代码的输出是什么？<br>
+function sayHi() {<br>
+console.log(name);<br>
+console.log(age);<br>
+var name = &quot;Lydia&quot;;<br>
+let age = 21;<br>
+}<br>
+sayHi();<br>
+• A: Lydia 和 undefined<br>
+• B: Lydia 和 ReferenceError<br>
+• C: ReferenceError 和 21<br>
+• D: undefined 和 ReferenceError<br>
+答案: D<br>
+在函数中，我们首先使用var关键字声明了name变量。 这意味着变量在创建阶段会被提升（JavaScript会在创建变量创建阶段为其分配内存空间），默认值为undefined，直到我们实际执行到使用该变量的行。 我们还没有为name变量赋值，所以它仍然保持undefined的值。<br>
+使用let关键字（和const）声明的变量也会存在变量提升，但与var不同，初始化没有被提升。 在我们声明（初始化）它们之前，它们是不可访问的。 这被称为“暂时死区”。 当我们在声明变量之前尝试访问变量时，JavaScript会抛出一个ReferenceError。<br>
+译者注：<br>
+关于let的是否存在变量提升，我们何以用下面的例子来验证：<br>
+let name = 'ConardLi'<br>
+{<br>
+console.log(name) // Uncaught ReferenceError: name is not defined<br>
+let name = 'code秘密花园'<br>
+}<br>
+let变量如果不存在变量提升，console.log(name)就会输出ConardLi，结果却抛出了ReferenceError，那么这很好的说明了，let也存在变量提升，但是它存在一个“暂时死区”，在变量未初始化或赋值前不允许访问。<br>
+变量的赋值可以分为三个阶段：<br>
+• 创建变量，在内存中开辟空间<br>
+• 初始化变量，将变量初始化为undefined<br>
+• 真正赋值<br>
+关于let、var和function：<br>
+• let 的「创建」过程被提升了，但是初始化没有提升。<br>
+• var 的「创建」和「初始化」都被提升了。<br>
+• function 的「创建」「初始化」和「赋值」都被提升了。</li>
+<li>【作用域】下面代码的输出是什么?<br>
+for (var i = 0; i &lt; 3; i++) {<br>
+setTimeout(() =&gt; console.log(i), 1);<br>
+}<br>
+for (let i = 0; i &lt; 3; i++) {<br>
+setTimeout(() =&gt; console.log(i), 1);<br>
+}<br>
+• A: 0 1 2 and 0 1 2<br>
+• B: 0 1 2 and 3 3 3<br>
+• C: 3 3 3 and 0 1 2<br>
+答案: C<br>
+由于JavaScript中的事件执行机制，setTimeout函数真正被执行时，循环已经走完。 由于第一个循环中的变量i是使用var关键字声明的，因此该值是全局的。 在循环期间，我们每次使用一元运算符++都会将i的值增加1。 因此在第一个例子中，当调用setTimeout函数时，i已经被赋值为3。<br>
+在第二个循环中，使用let关键字声明变量i：使用let（和const）关键字声明的变量是具有块作用域的（块是{}之间的任何东西）。 在每次迭代期间，i将被创建为一个新值，并且每个值都会存在于循环内的块级作用域。</li>
+<li>【this和箭头函数】下面代码的输出是什么?<br>
+const shape = {<br>
+radius: 10,<br>
+diameter() {<br>
+return this.radius * 2;<br>
+},<br>
+perimeter: () =&gt; 2 * Math.PI * this.radius<br>
+};<br>
+shape.diameter();<br>
+shape.perimeter();<br>
+• A: 20 and 62.83185307179586<br>
+• B: 20 and NaN<br>
+• C: 20 and 63<br>
+• D: NaN and 63<br>
+答案: B<br>
+请注意，diameter是普通函数，而perimeter是箭头函数。<br>
+对于箭头函数，this关键字指向是它所在上下文（定义时的位置）的环境，与普通函数不同！ 这意味着当我们调用perimeter时，它不是指向shape对象，而是指其定义时的环境（window）。没有值radius属性，返回undefined。</li>
+<li>【操作符的类型转换】下面代码的输出是什么?<br>
++true;<br>
+!&quot;Lydia&quot;;<br>
+• A: 1 and false<br>
+• B: false and NaN<br>
+• C: false and false<br>
+答案: A<br>
+一元加号会尝试将boolean类型转换为数字类型。 true被转换为1，false被转换为0。<br>
+字符串'Lydia'是一个真值。 我们实际上要问的是“这个真值是假的吗？”。 这会返回false。</li>
+<li>【对象key为字符串】哪个选项是不正确的?<br>
+const bird = {<br>
+size: &quot;small&quot;<br>
+};<br>
+const mouse = {<br>
+name: &quot;Mickey&quot;,<br>
+small: true<br>
+};<br>
+• A: mouse.bird.size<br>
+• B: mouse[bird.size]<br>
+• C: mouse[bird[&quot;size&quot;]]<br>
+• D: All of them are valid<br>
+答案: A<br>
+在JavaScript中，所有对象键都是字符串（除了Symbol）。尽管有时我们可能不会给定字符串类型，但它们总是被转换为字符串。<br>
+JavaScript解释语句。当我们使用方括号表示法时，它会看到第一个左括号[，然后继续，直到找到右括号]。只有在那个时候，它才会对这个语句求值。<br>
+mouse [bird.size]：首先它会对bird.size求值，得到small。 mouse [“small”]返回true。<br>
+但是，使用点表示法，这不会发生。 mouse没有名为bird的键，这意味着mouse.bird是undefined。 然后，我们使用点符号来询问size：mouse.bird.size。 由于mouse.bird是undefined，我们实际上是在询问undefined.size。 这是无效的，并将抛出Cannot read property &quot;size&quot; of undefined。</li>
+<li>【对象是引用变量指向原堆内存】下面代码的输出是什么?<br>
+let c = { greeting: &quot;Hey!&quot; };<br>
+let d;<br>
+d = c;<br>
+c.greeting = &quot;Hello&quot;;<br>
+console.log(d.greeting);<br>
+• A: Hello<br>
+• B: undefined<br>
+• C: ReferenceError<br>
+• D: TypeError<br>
+答案: A<br>
+在JavaScript中，当设置它们彼此相等时，所有对象都通过引用进行交互。<br>
+首先，变量c为对象保存一个值。 之后，我们将d指定为c与对象相同的引用。<br>
+更改一个对象时，可以更改所有对象。</li>
+<li>【new Number（）是一个内置的函数构造函数，返回一个对象】下面代码的输出是什么?<br>
+let a = 3;<br>
+let b = new Number(3);<br>
+let c = 3;<br>
+console.log(a == b);<br>
+console.log(a === b);<br>
+console.log(b === c);<br>
+• A: true false true<br>
+• B: false false true<br>
+• C: true false false<br>
+• D: false true true<br>
+答案: C<br>
+new Number（）是一个内置的函数构造函数。 虽然它看起来像一个数字，但它并不是一个真正的数字：它有一堆额外的功能，是一个对象。<br>
+当我们使用==运算符时，它只检查它是否具有相同的值。 他们都有3的值，所以它返回true。<br>
+译者注：<mark>会引发隐式类型转换，右侧的对象类型会自动拆箱为Number类型。<br>
+然而，当我们使用</mark>=操作符时，类型和值都需要相等，new Number()不是一个数字，是一个对象类型。两者都返回 false。</li>
+<li>【static静态方法仅在创建它们的构造函数中存在】下面代码的输出是什么?<br>
+class Chameleon {<br>
+static colorChange(newColor) {<br>
+this.newColor = newColor;<br>
+}<br>
+constructor({ newColor = &quot;green&quot; } = {}) {<br>
+this.newColor = newColor;<br>
+}<br>
+}<br>
+const freddie = new Chameleon({ newColor: &quot;purple&quot; });<br>
+freddie.colorChange(&quot;orange&quot;);<br>
+• A: orange<br>
+• B: purple<br>
+• C: green<br>
+• D: TypeError<br>
+答案: D<br>
+colorChange方法是静态的。 静态方法仅在创建它们的构造函数中存在，并且不能传递给任何子级。 由于freddie是一个子级对象，函数不会传递，所以在freddie实例上不存在freddie方法：抛出TypeError。</li>
+<li>【默认全局变量】下面代码的输出是什么?<br>
+let greeting;<br>
+greetign = {}; // Typo!<br>
+console.log(greetign);<br>
+• A: {}<br>
+• B: ReferenceError: greetign is not defined<br>
+• C: undefined<br>
+答案: A<br>
+控制台会输出空对象，因为我们刚刚在全局对象上创建了一个空对象！ 当我们错误地将greeting输入为greetign时，JS解释器实际上在浏览器中将其视为global.greetign = {}（或window.greetign = {}）。<br>
+为了避免这种情况，我们可以使用“use strict”。 这可以确保在将变量赋值之前必须声明变量。</li>
+<li>【函数是一种特殊类型的对象】当我们这样做时会发生什么?<br>
+function bark() {<br>
+console.log(&quot;Woof!&quot;);<br>
+}<br>
+bark.animal = &quot;dog&quot;;<br>
+• A: Nothing, this is totally fine!<br>
+• B: SyntaxError. You cannot add properties to a function this way.<br>
+• C: undefined<br>
+• D: ReferenceError<br>
+答案: A<br>
+这在JavaScript中是可能的，因为函数也是对象！（原始类型之外的所有东西都是对象）<br>
+函数是一种特殊类型的对象。您自己编写的代码并不是实际的函数。 该函数是具有属性的对象，此属性是可调用的。</li>
+<li>【不能像使用常规对象那样向构造函数添加属性】下面代码的输出是什么?<br>
+function Person(firstName, lastName) {<br>
+this.firstName = firstName;<br>
+this.lastName = lastName;<br>
+}<br>
+const member = new Person(&quot;Lydia&quot;, &quot;Hallie&quot;);<br>
+Person.getFullName = () =&gt; this.firstName + this.lastName;<br>
+console.log(member.getFullName());<br>
+• A: TypeError<br>
+• B: SyntaxError<br>
+• C: Lydia Hallie<br>
+• D: undefined undefined<br>
+答案: A<br>
+您不能像使用常规对象那样向构造函数添加属性。 如果要一次向所有对象添加功能，则必须使用原型。 所以在这种情况下应该这样写：<br>
+Person.prototype.getFullName = function () {<br>
+return <code>${this.firstName} ${this.lastName}</code>;<br>
+}<br>
+这样会使member.getFullName()是可用的，为什么样做是对的？ 假设我们将此方法添加到构造函数本身。 也许不是每个Person实例都需要这种方法。这会浪费大量内存空间，因为它们仍然具有该属性，这占用了每个实例的内存空间。 相反，如果我们只将它添加到原型中，我们只需将它放在内存中的一个位置，但它们都可以访问它！</li>
+<li>【new时，this指的是我们创建的新空对象】下面代码的输出是什么?<br>
+function Person(firstName, lastName) {<br>
+this.firstName = firstName;<br>
+this.lastName = lastName;<br>
+}<br>
+const lydia = new Person(&quot;Lydia&quot;, &quot;Hallie&quot;);<br>
+const sarah = Person(&quot;Sarah&quot;, &quot;Smith&quot;);<br>
+console.log(lydia);<br>
+console.log(sarah);<br>
+• A: Person {firstName: &quot;Lydia&quot;, lastName: &quot;Hallie&quot;} and undefined<br>
+• B: Person {firstName: &quot;Lydia&quot;, lastName: &quot;Hallie&quot;} and Person {firstName: &quot;Sarah&quot;, lastName: &quot;Smith&quot;}<br>
+• C: Person {firstName: &quot;Lydia&quot;, lastName: &quot;Hallie&quot;} and {}<br>
+• D:Person {firstName: &quot;Lydia&quot;, lastName: &quot;Hallie&quot;} and ReferenceError<br>
+答案: A<br>
+对于sarah，我们没有使用new关键字。 使用new时，它指的是我们创建的新空对象。 但是，如果你不添加new它指的是全局对象！<br>
+我们指定了this.firstName等于'Sarah和this.lastName等于Smith。 我们实际做的是定义global.firstName ='Sarah'和global.lastName ='Smith。 sarah本身的返回值是undefined。</li>
+<li>Dom事件传播的三个阶段是什么？?<br>
+• A: 目标 &gt; 捕获 &gt; 冒泡<br>
+• B: 冒泡 &gt; 目标 &gt; 捕获<br>
+• C: 目标 &gt; 冒泡 &gt; 捕获<br>
+• D: 捕获 &gt; 目标 &gt; 冒泡<br>
+答案: D<br>
+在捕获阶段，事件通过父元素向下传递到目标元素。 然后它到达目标元素，冒泡开始。</li>
+<li>所有对象都有原型.<br>
+• A: 对<br>
+• B: 错误<br>
+答案: B<br>
+除基础对象外，所有对象都有原型。 基础对象可以访问某些方法和属性，例如.toString。 这就是您可以使用内置JavaScript方法的原因！ 所有这些方法都可以在原型上找到。 虽然JavaScript无法直接在您的对象上找到它，但它会沿着原型链向下寻找并在那里找到它，这使您可以访问它。<br>
+译者注：基础对象指原型链终点的对象。基础对象的原型是null。</li>
+<li>【“+”的隐式类型转换】下面代码的输出是什么?<br>
+function sum(a, b) {<br>
+return a + b;<br>
+}<br>
+sum(1, &quot;2&quot;);<br>
+• A: NaN<br>
+• B: TypeError<br>
+• C: &quot;12&quot;<br>
+• D: 3<br>
+答案: C<br>
+JavaScript是一种动态类型语言：我们没有指定某些变量的类型。 在您不知情的情况下，值可以自动转换为另一种类型，称为隐式类型转换。 强制从一种类型转换为另一种类型。<br>
+在此示例中，JavaScript将数字1转换为字符串，以使函数有意义并返回值。 在让数字类型（1）和字符串类型（'2'）相加时，该数字被视为字符串。 我们可以连接像“Hello”+“World”这样的字符串，所以这里发生的是“1”+“2”返回“12”。</li>
+<li>【++操作符】下面代码的输出是什么?<br>
+let number = 0;<br>
+console.log(number++);<br>
+console.log(++number);<br>
+console.log(number);<br>
+• A: 1 1 2<br>
+• B: 1 2 2<br>
+• C: 0 2 2<br>
+• D: 0 1 2<br>
+答案: C<br>
+后缀一元运算符++：</li>
+<li>返回值（返回0）</li>
+<li>增加值（数字现在是1）<br>
+前缀一元运算符++：</li>
+<li>增加值（数字现在是2）</li>
+<li>返回值（返回2）<br>
+所以返回0 2 2。</li>
+<li>【模板字符串】下面代码的输出是什么?<br>
+function getPersonInfo(one, two, three) {<br>
+console.log(one);<br>
+console.log(two);<br>
+console.log(three);<br>
+}<br>
+const person = &quot;Lydia&quot;;<br>
+const age = 21;<br>
+getPersonInfo<code>${person} is ${age} years old</code>;<br>
+• A: Lydia 21 [&quot;&quot;, &quot;is&quot;, &quot;years old&quot;]<br>
+• B: [&quot;&quot;, &quot;is&quot;, &quot;years old&quot;] Lydia 21<br>
+• C: Lydia [&quot;&quot;, &quot;is&quot;, &quot;years old&quot;] 21<br>
+答案: B<br>
+如果使用标记的模板字符串，则第一个参数的值始终是字符串值的数组。 其余参数获取传递到模板字符串中的表达式的值！</li>
+<li>下面代码的输出是什么?<br>
+function checkAge(data) {<br>
+if (data === { age: 18 }) {<br>
+console.log(&quot;You are an adult!&quot;);<br>
+} else if (data == { age: 18 }) {<br>
+console.log(&quot;You are still an adult.&quot;);<br>
+} else {<br>
+console.log(<code>Hmm.. You don't have an age I guess</code>);<br>
+}<br>
+}<br>
+checkAge({ age: 18 });<br>
+• A: You are an adult!<br>
+• B: You are still an adult.<br>
+• C: Hmm.. You don't have an age I guess<br>
+答案: C<br>
+在比较相等性，原始类型通过它们的值进行比较，而对象通过它们的引用进行比较。JavaScript检查对象是否具有对内存中相同位置的引用。<br>
+我们作为参数传递的对象和我们用于检查相等性的对象在内存中位于不同位置，所以它们的引用是不同的。<br>
+这就是为什么{ age: 18 } === { age: 18 }和 { age: 18 } == { age: 18 } 返回 false的原因。</li>
+<li>【...args扩展操作符返回数组】下面代码的输出是什么?<br>
+function getAge(...args) {<br>
+console.log(typeof args);<br>
+}<br>
+getAge(21);<br>
+• A: &quot;number&quot;<br>
+• B: &quot;array&quot;<br>
+• C: &quot;object&quot;<br>
+• D: &quot;NaN&quot;<br>
+答案: C<br>
+扩展运算符（... args）返回一个带参数的数组。 数组是一个对象，因此typeof args返回object。</li>
+<li>【“use strict”，可以确保不会意外地声明全局变量】下面代码的输出是什么?<br>
+function getAge() {<br>
+&quot;use strict&quot;;<br>
+age = 21;<br>
+console.log(age);<br>
+}<br>
+getAge();<br>
+• A: 21<br>
+• B: undefined<br>
+• C: ReferenceError<br>
+• D: TypeError<br>
+答案: C<br>
+使用“use strict”，可以确保不会意外地声明全局变量。 我们从未声明变量age，因为我们使用`use strict'，它会引发一个ReferenceError。 如果我们不使用“use strict”，它就会起作用，因为属性age会被添加到全局对象中。</li>
+<li>【eval会为字符串传递的代码求值】下面代码的输出是什么?<br>
+const sum = eval(&quot;10<em>10+5&quot;);<br>
+• A: 105<br>
+• B: &quot;105&quot;<br>
+• C: TypeError<br>
+• D: &quot;10</em>10+5&quot;<br>
+答案: A<br>
+eval会为字符串传递的代码求值。 如果它是一个表达式，就像在这种情况下一样，它会计算表达式。 表达式为10 * 10 + 5计算得到105。</li>
+<li>【sessionStorage】cool_secret可以访问多长时间?<br>
+sessionStorage.setItem(&quot;cool_secret&quot;, 123);<br>
+• A：永远，数据不会丢失。<br>
+• B：用户关闭选项卡时。<br>
+• C：当用户关闭整个浏览器时，不仅是选项卡。<br>
+• D：用户关闭计算机时。<br>
+答案: B<br>
+关闭选项卡后，将删除存储在sessionStorage中的数据。<br>
+如果使用localStorage，数据将永远存在，除非例如调用localStorage.clear()。</li>
+<li>【var】下面代码的输出是什么?<br>
+var num = 8;<br>
+var num = 10;<br>
+console.log(num);<br>
+• A: 8<br>
+• B: 10<br>
+• C: SyntaxError<br>
+• D: ReferenceError<br>
+答案: B<br>
+使用var关键字，您可以用相同的名称声明多个变量。然后变量将保存最新的值。<br>
+您不能使用let或const来实现这一点，因为它们是块作用域的。</li>
+<li>【对象键（不包括Symbols）都会被存储为字符串】下面代码的输出是什么?<br>
+const obj = { 1: &quot;a&quot;, 2: &quot;b&quot;, 3: &quot;c&quot; };<br>
+const set = new Set([1, 2, 3, 4, 5]);<br>
+obj.hasOwnProperty(&quot;1&quot;);<br>
+obj.hasOwnProperty(1);<br>
+set.has(&quot;1&quot;);<br>
+set.has(1);<br>
+• A: false true false true<br>
+• B: false true true true<br>
+• C: true true false true<br>
+• D: true true true true<br>
+答案: C<br>
+所有对象键（不包括Symbols）都会被存储为字符串，即使你没有给定字符串类型的键。 这就是为什么obj.hasOwnProperty（'1'）也返回true。<br>
+上面的说法不适用于Set。 在我们的Set中没有“1”：set.has（'1'）返回false。 它有数字类型1，set.has（1）返回true。</li>
+<li>【对象有两个具有相同名称的键，则将替前面的键】下面代码的输出是什么?<br>
+const obj = { a: &quot;one&quot;, b: &quot;two&quot;, a: &quot;three&quot; };<br>
+console.log(obj);<br>
+• A: { a: &quot;one&quot;, b: &quot;two&quot; }<br>
+• B: { b: &quot;two&quot;, a: &quot;three&quot; }<br>
+• C: { a: &quot;three&quot;, b: &quot;two&quot; }<br>
+• D: SyntaxError<br>
+答案: C<br>
+如果对象有两个具有相同名称的键，则将替前面的键。它仍将处于第一个位置，但具有最后指定的值。</li>
+<li>JavaScript全局执行上下文为你创建了两个东西:全局对象和this关键字.<br>
+• A: 对<br>
+• B: 错误<br>
+• C: 视情况而定<br>
+答案: A<br>
+基本执行上下文是全局执行上下文:它是代码中随处可访问的内容。</li>
+<li>【continue语句跳过迭代】下面代码的输出是什么?<br>
+for (let i = 1; i &lt; 5; i++) {<br>
+if (i === 3) continue;<br>
+console.log(i);<br>
+}<br>
+• A: 1 2<br>
+• B: 1 2 3<br>
+• C: 1 2 4<br>
+• D: 1 3 4<br>
+答案: C<br>
+如果某个条件返回true，则continue语句跳过迭代。</li>
+<li>【String是一个内置的构造函数】下面代码的输出是什么?<br>
+String.prototype.giveLydiaPizza = () =&gt; {<br>
+return &quot;Just give Lydia pizza already!&quot;;<br>
+};<br>
+const name = &quot;Lydia&quot;;<br>
+name.giveLydiaPizza();<br>
+• A: &quot;Just give Lydia pizza already!&quot;<br>
+• B: TypeError: not a function<br>
+• C: SyntaxError<br>
+• D: undefined<br>
+答案: A<br>
+String是一个内置的构造函数，我们可以为它添加属性。 我刚给它的原型添加了一个方法。 原始类型的字符串自动转换为字符串对象，由字符串原型函数生成。 因此，所有字符串（字符串对象）都可以访问该方法！<br>
+译者注：<br>
+当使用基本类型的字符串调用giveLydiaPizza时，实际上发生了下面的过程：<br>
+• 创建一个String的包装类型实例<br>
+• 在实例上调用substring方法<br>
+• 销毁实例</li>
+<li>【对象键值默认隐式类型转换为字符串】下面代码的输出是什么?<br>
+const a = {};<br>
+const b = { key: &quot;b&quot; };<br>
+const c = { key: &quot;c&quot; };<br>
+a[b] = 123;<br>
+a[c] = 456;<br>
+console.log(a[b]);<br>
+• A: 123<br>
+• B: 456<br>
+• C: undefined<br>
+• D: ReferenceError<br>
+答案: B<br>
+对象键自动转换为字符串。我们试图将一个对象设置为对象a的键，其值为123。<br>
+但是，当对象自动转换为字符串化时，它变成了[Object object]。 所以我们在这里说的是a[&quot;Object object&quot;] = 123。 然后，我们可以尝试再次做同样的事情。 c对象同样会发生隐式类型转换。那么，a[&quot;Object object&quot;] = 456。<br>
+然后，我们打印a[b]，它实际上是a[&quot;Object object&quot;]。 我们将其设置为456，因此返回456。</li>
+<li>【事件循环】下面代码的输出是什么?<br>
+const foo = () =&gt; console.log(&quot;First&quot;);<br>
+const bar = () =&gt; setTimeout(() =&gt; console.log(&quot;Second&quot;));<br>
+const baz = () =&gt; console.log(&quot;Third&quot;);<br>
+bar();<br>
+foo();<br>
+baz();<br>
+• A: First Second Third<br>
+• B: First Third Second<br>
+• C: Second First Third<br>
+• D: Second Third First<br>
+答案: B<br>
+我们有一个setTimeout函数并首先调用它。 然而却最后打印了它。<br>
+这是因为在浏览器中，我们不只有运行时引擎，我们还有一个叫做WebAPI的东西。WebAPI为我们提供了setTimeout函数，例如DOM。<br>
+将callback推送到WebAPI后，setTimeout函数本身（但不是回调！）从堆栈中弹出。<br>
+现在，调用foo，并打印First。<br>
+foo从堆栈弹出，baz被调用，并打印Third。<br>
+WebAPI不能只是在准备就绪时将内容添加到堆栈中。 相反，它将回调函数推送到一个称为任务队列的东西。<br>
+这是事件循环开始工作的地方。 事件循环查看堆栈和任务队列。 如果堆栈为空，则会占用队列中的第一个内容并将其推送到堆栈中。<br>
+bar被调用，Second被打印，它从栈中弹出。</li>
+<li>【target】单击按钮时event.target是什么?</li>
+</ol>
+<div onclick="console.log('first div')">
+  <div onclick="console.log('second div')">
+    <button onclick="console.log('button')">
+      Click!
+    </button>
+  </div>
+</div>
+• A: div外部
+• B: div内部
+• C: button
+• D: 所有嵌套元素的数组.
+答案: C
+导致事件的最深嵌套元素是事件的目标。 你可以通过event.stopPropagation停止冒泡
+32. 【event默认在冒泡阶段执行】单击下面的html片段打印的内容是什么?
+<div onclick="console.log('div')">
+  <p onclick="console.log('p')">
+    Click here!
+</div>
+• A: p div
+• B: div p
+• C: p
+• D: div
+答案: A
+如果我们单击p，我们会看到两个日志：p和div。在事件传播期间，有三个阶段：捕获，目标和冒泡。 默认情况下，事件处理程序在冒泡阶段执行（除非您将useCapture设置为true）。 它从最深的嵌套元素向外延伸。
+33. 【this，call，bind】下面代码的输出是什么?
+const person = { name: "Lydia" };
+function sayHi(age) {
+  console.log(`${this.name} is ${age}`);
+}
+sayHi.call(person, 21);
+sayHi.bind(person, 21);
+• A: undefined is 21 Lydia is 21
+• B: function function
+• C: Lydia is 21 Lydia is 21
+• D: Lydia is 21 function
+答案: D
+使用两者，我们可以传递我们想要this关键字引用的对象。 但是，.call方法会立即执行！
+.bind方法会返回函数的拷贝值，但带有绑定的上下文！ 它不会立即执行。
+34. 【自执行，返回值】下面代码的输出是什么?
+function sayHi() {
+  return (() => 0)();
+}
+typeof sayHi();
+• A: "object"
+• B: "number"
+• C: "function"
+• D: "undefined"
+答案: B
+sayHi函数返回立即调用的函数（IIFE）的返回值。 该函数返回0，类型为数字。
+仅供参考：只有7种内置类型：null，undefined，boolean，number，string，object和symbol。 function不是一个类型，因为函数是对象，它的类型是object。
+35. 【JS假值：undefined，null，NaN，0，'' (empty string)，false】下面这些值哪些是假值?
+0;
+new Number(0);
+("");
+(" ");
+new Boolean(false);
+undefined;
+• A: 0, '', undefined
+• B: 0, new Number(0), '', new Boolean(false), undefined
+• C: 0, '', new Boolean(false), undefined
+• D: 所有都是假值
+答案: A
+JavaScript中只有6个假值：
+• undefined
+• null
+• NaN
+• 0
+• '' (empty string)
+• false
+函数构造函数，如new Number和new Boolean都是真值。
+36. 【typeof】下面代码的输出是什么?
+console.log(typeof typeof 1);
+• A: "number"
+• B: "string"
+• C: "object"
+• D: "undefined"
+答案: B
+typeof 1 返回 "number".
+typeof "number" 返回 "string"
+37. 【数组】下面代码的输出是什么?
+const numbers = [1, 2, 3];
+numbers[10] = 11;
+console.log(numbers);
+• A: [1, 2, 3, 7 x null, 11]
+• B: [1, 2, 3, 11]
+• C: [1, 2, 3, 7 x empty, 11]
+• D: SyntaxError
+答案: C
+When you set a value to an element in an array that exceeds the length of the array, JavaScript creates something called "empty slots". These actually have the value of undefined, but you will see something like:
+当你为数组中的元素设置一个超过数组长度的值时，JavaScript会创建一个名为“空插槽”的东西。 这些位置的值实际上是undefined，但你会看到类似的东西：
+[1, 2, 3, 7 x empty, 11]
+这取决于你运行它的位置（每个浏览器有可能不同）。
+38. 【块级作用域】下面代码的输出是什么?
+(() => {
+  let x, y;
+  try {
+    throw new Error();
+  } catch (x) {
+    (x = 1), (y = 2);
+    console.log(x);
+  }
+  console.log(x);
+  console.log(y);
+})();
+• A: 1 undefined 2
+• B: undefined undefined undefined
+• C: 1 1 2
+• D: 1 undefined undefined
+答案: A
+catch块接收参数x。当我们传递参数时，这与变量的x不同。这个变量x是属于catch作用域的。
+之后，我们将这个块级作用域的变量设置为1，并设置变量y的值。 现在，我们打印块级作用域的变量x，它等于1。
+在catch块之外，x仍然是undefined，而y是2。 当我们想在catch块之外的console.log(x)时，它返回undefined，而y返回2。
+39. JavaScript中的所有内容类型都是…
+• A：原始或对象
+• B：函数或对象
+• C：技巧问题！只有对象
+• D：数字或对象
+答案: A
+JavaScript只有原始类型和对象。
+原始类型是boolean，null，undefined，bigint，number，string和symbol。
+40. 【reduce】下面代码的输出是什么?
+[[0, 1], [2, 3]].reduce(
+  (acc, cur) => {
+    return acc.concat(cur);
+  },
+  [1, 2]
+);
+• A: [0, 1, 2, 3, 1, 2]
+• B: [6, 1, 2]
+• C: [1, 2, 0, 1, 2, 3]
+• D: [1, 2, 6]
+答案: C
+[1,2]是我们的初始值。 这是我们开始执行reduce函数的初始值，以及第一个acc的值。 在第一轮中，acc是[1,2]，cur是[0,1]。 我们将它们连接起来，结果是[1,2,0,1]。
+然后，acc的值为[1,2,0,1]，cur的值为[2,3]。 我们将它们连接起来，得到[1,2,0,1,2,3]。
+41. 【false值】下面代码的输出是什么?
+!!null;
+!!"";
+!!1;
+• A: false true false
+• B: false false true
+• C: false true true
+• D: true true false
+答案: B
+null是假值。 !null返回true。 !true返回false。
+""是假值。 !""返回true。 !true返回false。
+1是真值。 !1返回false。 !false返回true。
+42. `setInterval`方法的返回值什么?
+setInterval(() => console.log("Hi"), 1000);
+• A：一个唯一的id
+• B：指定的毫秒数
+• C：传递的函数
+• D：undefined
+答案: A
+它返回一个唯一的id。 此id可用于使用clearInterval()函数清除该定时器。
+43. 【扩展运算符将迭代的每个字符映射到一个元素】What does this return?
+[..."Lydia"];
+• A: ["L", "y", "d", "i", "a"]
+• B: ["Lydia"]
+• C: [[], "Lydia"]
+• D: [["L", "y", "d", "i", "a"]]
+答案: A
+字符串是可迭代的。 扩展运算符将迭代的每个字符映射到一个元素。]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[正则表达式]]></title>
+        <id>http://toolman.live/post/zheng-ze-biao-da-shi/</id>
+        <link href="http://toolman.live/post/zheng-ze-biao-da-shi/">
+        </link>
+        <updated>2020-04-30T02:31:08.000Z</updated>
+        <content type="html"><![CDATA[<p>创建<br>
+在正则表达式中，有两种方式可以去创建正则表达式：</p>
+<ol>
+<li>字面量<br>
+const reg = /abc/;</li>
+<li></li>
+<li>构造函数<br>
+const reg = new RegExp('abc');<br>
+对于这两种方式，如果正则表达式是静态的，那么，使用第一种字面量的方式，性能会比较好。但是，如果正则表达式是动态的，是根据变量来定义的，那么，只能使用第二种构造函数的方式。<br>
+语法</li>
+<li>^ 和 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">的</mi><mi mathvariant="normal">对</mi><msup><mi mathvariant="normal">比</mi><mi mathvariant="normal">：</mi></msup><mi mathvariant="normal">匹</mi><mi mathvariant="normal">配</mi><mi mathvariant="normal">字</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">串</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">行</mi><mi mathvariant="normal">首</mi><mi mathvariant="normal">。</mi><mi mathvariant="normal">示</mi><mi mathvariant="normal">例</mi><mi mathvariant="normal">说</mi><mi mathvariant="normal">明</mi><mi mathvariant="normal">：</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>t</mi><mi>r</mi><mi>e</mi><mi>g</mi><mo>=</mo><msup><mi mathvariant="normal">/</mi><mi>A</mi></msup><mi mathvariant="normal">/</mi><mo separator="true">;</mo><mi>c</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">.</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo>(</mo><mi>r</mi><mi>e</mi><mi>g</mi><mi mathvariant="normal">.</mi><mi>t</mi><mi>e</mi><mi>s</mi><mi>t</mi><msup><mo>(</mo><mo mathvariant="normal">′</mo></msup><mi>A</mi><mi>n</mi><msup><mi>t</mi><mo mathvariant="normal">′</mo></msup><mo>)</mo><mo>)</mo><mo separator="true">;</mo><mi mathvariant="normal">/</mi><mi mathvariant="normal">/</mi><mi>t</mi><mi>r</mi><mi>u</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>s</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi mathvariant="normal">.</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo>(</mo><mi>r</mi><mi>e</mi><mi>g</mi><mi mathvariant="normal">.</mi><mi>t</mi><mi>e</mi><mi>s</mi><mi>t</mi><msup><mo>(</mo><mo mathvariant="normal">′</mo></msup><mi>A</mi><mi>n</mi><msup><mi>t</mi><mo mathvariant="normal">′</mo></msup><mo>)</mo><mo>)</mo><mo separator="true">;</mo><mi mathvariant="normal">/</mi><mi mathvariant="normal">/</mi><mi>f</mi><mi>a</mi><mi>l</mi><mi>s</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">的对比
+^：匹配字符串的行首。示例说明：
+const reg = /^A/;
+console.log(reg.test(&#x27;Ant&#x27;));    //true
+console.log(reg.test(&#x27; Ant&#x27;));       //false
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.80952em;vertical-align:-0.19444em;"></span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">对</span><span class="mord"><span class="mord cjk_fallback">比</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.363em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord cjk_fallback mtight">：</span></span></span></span></span></span></span></span><span class="mord cjk_fallback">匹</span><span class="mord cjk_fallback">配</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">串</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">行</span><span class="mord cjk_fallback">首</span><span class="mord cjk_fallback">。</span><span class="mord cjk_fallback">示</span><span class="mord cjk_fallback">例</span><span class="mord cjk_fallback">说</span><span class="mord cjk_fallback">明</span><span class="mord cjk_fallback">：</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.0913309999999998em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">/</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8413309999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">A</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord">.</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord">.</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen"><span class="mopen">(</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mord mathdefault">A</span><span class="mord mathdefault">n</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">/</span><span class="mord">/</span><span class="mord mathdefault">t</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">u</span><span class="mord mathdefault">e</span><span class="mord mathdefault">c</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">s</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord">.</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.02778em;">r</span><span class="mord mathdefault">e</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord">.</span><span class="mord mathdefault">t</span><span class="mord mathdefault">e</span><span class="mord mathdefault">s</span><span class="mord mathdefault">t</span><span class="mopen"><span class="mopen">(</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mord mathdefault">A</span><span class="mord mathdefault">n</span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">/</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">s</span><span class="mord mathdefault">e</span></span></span></span>：匹配字符串的行尾。示例说明：<br>
+const reg = /t$/;<br>
+console.log(reg.test('eat'));       //true<br>
+console.log(reg.test('enter'));       //false</li>
+<li></li>
+</ol>
+<p>2.重复限定符（<em>、+、？、{n}、{n,}、{n, m}）<br>
+<em>：匹配前一个字符0次或多次，(x &gt;= 0)<br>
+const reg = /a</em>/;<br>
+console.log(reg.test('ba'));      //true<br>
+console.log(reg.test('b'));       //true<br>
+console.log(reg.test('baaa'));     //true<br>
++：匹配前一个字符1次或多次，(x &gt;= 1)<br>
+const reg = /a+/;<br>
+console.log(reg.test('ba'));    //true<br>
+console.log(reg.test('baaa'));    //true<br>
+console.log(reg.test('b'));     //false<br>
+?：匹配前一个字符的0次或1次，(x = 0 || x = 1)<br>
+const reg = /ba?/;<br>
+console.log(reg.exec('ba'));      //['ba']<br>
+console.log(reg.exec('baaa'));      //['ba']<br>
+console.log(reg.exec('b'));     //['b']<br>
+注：这里只是指明了?字符的限定符方面的用法，它还可以控制贪婪模式和非贪婪模式(下文可见)<br>
+{n}: 匹配前一个字符n次，(x = n)<br>
+const reg = /ba{3}/;<br>
+console.log(reg.test('ba'));     //false<br>
+console.log(reg.test('baaa'));      //true<br>
+console.log(reg.test('b'));     //false<br>
+{n,}：匹配前一个字符n次或大于n次，(x &gt;=n)<br>
+const reg = /ba{3,}/;<br>
+console.log(reg.test('ba'));     //false<br>
+console.log(reg.test('baaa'));      //true<br>
+console.log(reg.test('baaaa'));      //true<br>
+console.log(reg.test('b'));      //false<br>
+{n, m}：匹配前一个字符n次到m次之间，(n &lt;= x &lt;= m)<br>
+const reg = /ba{2,3}/;<br>
+console.log(reg.test('ba'));     //false<br>
+console.log(reg.test('baaa'));     //true<br>
+console.log(reg.test('baa'));     //true<br>
+console.log(reg.test('b'));      //false<br>
+3.元字符（.、\d、\w、\s、\b）<br>
+.：匹配除换行符以外的所有字符<br>
+const reg = /b.?/;<br>
+console.log(reg.exec('ba'));     //['ba']<br>
+console.log(reg.exec('bxaa'));      //['bx']<br>
+console.log(reg.exec('bza'));     //['bz']<br>
+console.log(reg.exec('b'));      //['b']<br>
+\d：匹配数字字符，与[0-9]一致（单词记忆法 =&gt; 数字【digital】）<br>
+const reg = /b\d/;<br>
+console.log(reg.exec('b1'));       //['b1']<br>
+console.log(reg.exec('b2aa'));      //['b2']<br>
+console.log(reg.exec('bza'));      //null<br>
+console.log(reg.exec('b'));        //null<br>
+\w：匹配字母、数字和下划线（单词记忆法 =&gt; 单词【word】）<br>
+const reg = /b\w/;<br>
+console.log(reg.exec('b1'));     //['b1']<br>
+console.log(reg.exec('b2aa'));     //['b2']<br>
+console.log(reg.exec('bza'));      //['bz']<br>
+console.log(reg.exec('b'));       //null<br>
+\b：匹配一个边界，一个独立单词的开头或结尾（单词记忆法 =&gt; 边界【border】）<br>
+const str = 'moon is white';<br>
+console.log(str.match(/\bm/));     //['m']<br>
+console.log(str.match(/oon\b/));     //['oon']<br>
+\s：匹配空白符（空格、换行符、制表符）(单词记忆法 =&gt; 符号【space】)<br>
+const str = 'moon is white';<br>
+console.log(str.match(/is\swhite/));    //['is white']<br>
+console.log(str.match(/moon\sis/));    // ['moon is']<br>
+4.反元字符（[^x]、\D、\W、\B、\S）<br>
+[^x]：匹配除x之外的任意字符<br>
+const reg = /b[^a]/;<br>
+console.log(reg.exec('ba'));     //null<br>
+console.log(reg.exec('bz'));     //['bz']<br>
+console.log(reg.exec('by'));    //['by']<br>
+\D：匹配除数字之外的任意字符，与\d相反<br>
+const reg = /b\D/;<br>
+console.log(reg.exec('b1'));    //null<br>
+console.log(reg.exec('b2'));    //null<br>
+console.log(reg.exec('by'));     //['by']<br>
+\W：匹配除数字、字母和下划线以外的任意字符，与\w相反<br>
+const reg = /b\W/;<br>
+console.log(reg.exec('b1'));     //null<br>
+console.log(reg.exec('ba'));     //null<br>
+console.log(reg.exec('b_'));      //null<br>
+console.log(reg.exec('b</em>'));      //['b*']<br>
+\B：匹配非单词边界的字符，与\b相反<br>
+const str = 'moon is white';<br>
+console.log(str.match(/\Boon/));     //['oon']<br>
+console.log(str.match(/whit\B/));      //['whit']<br>
+\S：匹配非空白字符，与\s相反<br>
+const str = 'moon is white';<br>
+console.log(str.match(/mo\Sn/));    //['moon']<br>
+console.log(str.match(/whit\S/));      //['white']<br>
+5.字符组（[...]）<br>
+[...]：匹配方括号中的字符集合，例如[0-9] =&gt; 匹配数字字符<br>
+const reg = /b[a-z]/;<br>
+console.log(reg.test('ba'));      //true<br>
+console.log(reg.test('bA'));       //false<br>
+6.分组（(...)）<br>
+(X)：将括号中的字符看成一个组进行匹配，例如(ab)+ =&gt; 可以匹配'ababab'<br>
+const reg = /(abab)+/;<br>
+console.log(reg.exec('ababab'));     //['abab', 'abab']<br>
+console.log(reg.exec('abababab'));   //['abababab','abab']<br>
+(?:X)：匹配X，但是不记录匹配项。而上面的(X)是记录匹配项的。<br>
+(?=X)：正向肯定查找，即匹配后面紧跟X的字符串。<br>
+const reg = /\d+(?=.)/;<br>
+console.log(reg.exec('3.141'))  //['3']<br>
+(?!X)：正向否定查找，即匹配后面不跟X的字符串，与(?:X)相反。<br>
+const reg = /\d+(?!.)/;<br>
+console.log(reg.exec('3.141'))   //['141']<br>
+7.多选符 （|）<br>
+|：匹配两者中的一个，例如a|b =&gt; 匹配a或b<br>
+const reg = /a|b/;<br>
+console.log(reg.exec('a'));     //['a']<br>
+console.log(reg.exec('b'));     //['b']<br>
+console.log(reg.exec('c'));      //['c']<br>
+8.转移字符（\）<br>
+\：表示转义字符，将特殊的字符转义成普通字符进行匹配<br>
+匹配方式<br>
+匹配方式，即正则表达式在匹配过程中，当具备多个结果时，按照一定的模式进行匹配。<br>
+匹配方式可分为两种，贪婪模式和非贪婪模式。<br>
+贪婪模式：即以限定符最大重复标准进行匹配。例如：使用/ba*/匹配'baaaaa'时，结果可返回'baaaaa'<br>
+非贪婪模式：即以限定符最小重复标准进行匹配。例如：使用/ba*?/匹配'baaaaa'时，结果可返回'b'<br>
+const str = 'baaaaa';<br>
+console.log(str.match(/ba*/));           //['baaaaa']<br>
+console.log(str.match(/ba*?/));        //['b']<br>
+其中?符号起到了贪婪与非贪婪模式之间的转变，在重复限定符后加上?，按非贪婪模式进行匹配；默认为贪婪模式。<br>
+标识方式<br>
+标识方式，就是正则表达式后面跟的匹配方式，flag<br>
+g：全局匹配，记忆方式【global】<br>
+i：忽略大小写，记忆方式【ignore】<br>
+m：多行搜索，记忆方式【multline】<br>
+方法<br>
+使用正则表达式的方式一共有6种，可以分成：reg有两种，string有四种。<br>
+首先，我们来看一下reg对象带的两种方法：exec和test</p>
+<ol>
+<li>test =&gt; 判断字符串中是否存在与正则表达式匹配的字符串，返回boolean类型<br>
+const reg = /abc/;<br>
+console.log(reg.test('abca'));     //true<br>
+console.log(reg.test('abac'));     //false</li>
+<li>exec =&gt; 匹配字符串中满足条件的字符串，返回一个匹配的结果数组<br>
+const reg = /\d+/;<br>
+console.log(reg.exec('1234dhi343sf2'));    //['1234']<br>
+之后是string的四种方法：match、search、replace、split<br>
+3.match：查找字符串中的匹配的字符串，返回一个结果数组，若没有匹配则返回null<br>
+const str = 'this is reg expression test'<br>
+console.log(str.match(/\bi.\s\w+/)); //['is reg']</li>
+<li>search：查找字符串中匹配的字符串，返回匹配字符串的下标，若没有匹配则返回-1<br>
+const str = 'this is reg expression test'<br>
+console.log(str.search(/\bi.\s\w+/));    //5<br>
+5.replace：查找字符串中匹配的字符串，对其进行替换（这是一个个人觉得比较厉害的技能）<br>
+• 接收字符串<br>
+const str = 'this is reg expression test'<br>
+console.log(str.replace(/\b(i.)\s(\w+)/, '$1 hello <span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \b at position 108: …&#039;
+str.replace(/\̲b̲(i.)\s(\w+)/, (…'>2&#039;));    //&#039;this is hello reg expression test&#039;
+接收函数
+const str = &#039;this is reg expression test&#039;
+str.replace(/\b(i.)\s(\w+)/, (...args) =&gt; {
+console.log(args);
+});    //[&quot;is reg&quot;, &quot;is&quot;, &quot;reg&quot;, 5, &quot;this is reg expression test&quot;]
+注：这个函数会有一些参数，第一个是匹配的字符串，第二个是第一项匹配的，第三个是第二项匹配的，第四个是匹配的下标，第五个是原字符串
+6.split：使用正则表达式或者固定字符，分割字符串
+const str = &#039;this is reg expression test&#039;
+console.log(str.split(/\s/))   //[&quot;this&quot;, &quot;is&quot;, &quot;reg&quot;, &quot;expression&quot;, &quot;test&quot;]
+应用
+1、匹配中文
+const str=&#039;只能是中文&#039;;
+const reg=/^[\u4E00-\u9FFF]+</span>/;<br>
+console.log(reg.test(str));<br>
+2、匹配双字节字符（包括汉字）<br>
+const str='匹配双字节字符';<br>
+const reg=/[^\x00-\xff]/;<br>
+console.log(reg.test(str));<br>
+3、手机号码严格版，验证前3位<br>
+const str='15000000000';<br>
+const reg=/^(13[0-9]|17[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|16[4]|18[0-9])\d{8}<span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \d at position 113: … reg=/^1[34578]\̲d̲{9}'>/;
+console.log(reg.test(str));
+4、手机号码验证前两位（注：现在有13、14、15、17、18开头的）
+const str=&#039;15000000000&#039;;
+const reg=/^1[34578]\d{9}</span>/;<br>
+console.log(reg.test(str));<br>
+5、IP地址<br>
+const str='20.20.26.20';<br>
+const reg=/^((2[0-4]\d|25[0-5]|1\d{2}|[1-9]?\d).){3}(2[0-4]\d|25[0-5]|1\d{2}|[1-9]?\d)<span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \w at position 74: …&#039;;
+const reg=/[\̲w̲!#'>/;
+console.log(reg.test(str));
+6、邮箱
+const str=&#039;123@163.com&#039;;
+const reg=/[\w!#</span>%&amp;'<em>+/=?^_<code>{|}~-]+(?:\.[\w!#$%&amp;'*+/=?^_</code>{|}~-]+)</em>@(?:<a href="?:%5B%5Cw-%5D*%5B%5Cw%5D">\w</a>?.)+<a href="?:%5B%5Cw-%5D*%5B%5Cw%5D">\w</a>?/;<br>
+console.log(reg.test(str));<br>
+7、匹配URL<br>
+const str='http://www.imooc.com';<br>
+const reg=/[a-zA-z]+://[^\s]<em>/;<br>
+console.log(reg.test(str));<br>
+8、匹配国内电话号码<br>
+const str='0531-88881234';<br>
+const reg=/\d{3}-\d{8}|\d{4}-{7,8}/;<br>
+console.log(reg.test(str));<br>
+9、匹配腾讯QQ号<br>
+const str='88881234';<br>
+const reg=/[1-9][0-9]{4,}/;<br>
+console.log(reg.test(str));<br>
+10、匹配中国邮政编码<br>
+const str='881234';<br>
+const reg=/[1-9]\d{5}(?!\d)/;<br>
+console.log(reg.test(str));<br>
+11、匹配18位身份证<br>
+const str='123456789012345678';<br>
+const reg=/^(\d{6})(\d{4})(\d{2})(\d{2})(\d{3})([0-9]|X)<span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \+ at position 337: …const reg=/^(-|\̲+̲)?[1-9]\d*'>/;
+console.log(reg.test(str));
+12、匹配年-月-日格式日期
+const str=&#039;1991-07-10&#039;;
+const reg=/([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})-(((0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)-(0[1-9]|[12][0-9]|30))|(02-(0[1-9]|[1][0-9]|2[0-8])))/;
+console.log(reg.test(str));
+13、匹配整数
+const str=&#039;12&#039;;
+const reg=/^(-|\+)?[1-9]\d*</span>/;<br>
+console.log(reg.test(str));<br>
+14、匹配小数<br>
+const str='12.99';<br>
+const reg=/^(-|+)?[1-9]\d</em>.\d*|-0.\d*[1-9]\d*<span class='katex-error' title='ParseError: KaTeX parse error: Undefined control sequence: \s at position 149: …= str.replace(/\̲s̲*/g,&quot;&quot;);      
+…'>/;
+console.log(reg.test(str));
+相关面试题
+1、请用js去除字符串空格？
+str为要去除空格的字符串，实例如下：
+const str = &quot;   xiao  ming   &quot;;
+使用replace正则匹配的方法
+去除所有空格: str = str.replace(/\s*/g,&quot;&quot;);      
+去除两头空格: str = str.replace(/^\s*|\s*</span>/g,&quot;&quot;);<br>
+去除左空格： str = str.replace( /^\s*/, “”);<br>
+去除右空格： str = str.replace(/(\s*$)/g, &quot;&quot;);</li>
+</ol>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[test22]]></title>
-        <id>http://toolman.live/post/test22/</id>
-        <link href="http://toolman.live/post/test22/">
+        <title type="html"><![CDATA[浅拷贝和深拷贝]]></title>
+        <id>http://toolman.live/post/qian-kao-bei-he-shen-kao-bei/</id>
+        <link href="http://toolman.live/post/qian-kao-bei-he-shen-kao-bei/">
         </link>
-        <updated>2020-04-18T04:34:53.000Z</updated>
-        <content type="html"><![CDATA[<p>2020418</p>
+        <updated>2020-04-30T02:30:11.000Z</updated>
+        <content type="html"><![CDATA[<p>知识基础：栈堆，基本数据类型与引用数据类型;<br>
+• 基本类型--名值存储在栈内存中<br>
+• 引用数据类型--名存在栈内存中，值存在于堆内存中，但是栈内存会提供一个引用的地址指向堆内存中的值<br>
+function deepClone(obj){<br>
+let objClone = Array.isArray(obj)?[]:{};<br>
+if(obj &amp;&amp; typeof obj===&quot;object&quot;){<br>
+for(let key in obj){<br>
+if(obj.hasOwnProperty(key)){<br>
+//判断ojb子元素是否为对象，如果是，递归复制<br>
+if(obj[key] &amp;&amp; typeof obj[key] ===&quot;object&quot;){<br>
+objClone[key] = deepClone(obj[key]);<br>
+}else{<br>
+//如果不是，简单复制<br>
+objClone[key] = obj[key];<br>
+}<br>
+}<br>
+}<br>
+}<br>
+return objClone;<br>
+}</p>
+<p>let a=[0,1,[2,3],4],<br>
+b=deepClone(a);<br>
+a[0]=1;<br>
+a[2][0]=1;<br>
+console.log(a,b);</p>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[test]]></title>
-        <id>http://toolman.live/post/test/</id>
-        <link href="http://toolman.live/post/test/">
+        <title type="html"><![CDATA[JS 之 this和call、apply、bind]]></title>
+        <id>http://toolman.live/post/js-zhi-this-he-callapplybind/</id>
+        <link href="http://toolman.live/post/js-zhi-this-he-callapplybind/">
         </link>
-        <updated>2020-04-16T15:39:42.000Z</updated>
-        <content type="html"><![CDATA[<p>11111111111111111111dfddddddddddg</p>
+        <updated>2020-04-30T02:29:50.000Z</updated>
+        <content type="html"><![CDATA[<p>this<br>
+是js代码执行时的环境对象，一般在函数中使用，在函数执行时，根据函数的调用方式不同而不同，在运行时不能通过赋值的方式修改；、</p>
+<ol>
+<li>this的常见情况</li>
+<li>事件中的this是绑定当前事件的元素；</li>
+<li>自执行函数中的this指向全局（浏览器端window）；</li>
+<li>定时器回调函数中的this指向全局（浏览器端window）；</li>
+<li>全局作用域的this指向全局（浏览器端window）</li>
+<li>方法调用时看方法执行前有没有点，如果有，点前面是谁this就是谁，没有就是全局（浏览器端window）</li>
+<li>箭头函数中的this是箭头函数声明时所在作用域中的this</li>
+<li>构造函数中的this指向当前实例<br>
+• Function.prototype 上的三个方法call、apply、bind 供Function的实例用来修改函数中的this指向<br>
+console.log(Function.prototype);</li>
+<li>call Function.prototype.call<br>
+function fe(a, b) {<br>
+console.log(a, b);<br>
+console.log(this);<br>
+}<br>
+fe(1, 2); // this -&gt; window<br>
+• 使用call方法修改this<br>
+• 语法：函数名.call(ctx, 实参1, 实参2.....)<br>
+• 参数：ctx 将函数中的this修改为ctx; 从第二个参数开始，后面的参数都是传递给函数执行的实参<br>
+• 作用: 修改方法中的关键字为call方法的第一个实参ctx,并且把后面的参数当做实参传给函数，最后让函数执行；<br>
+var obj = {<br>
+id: '0511120117'<br>
+};<br>
+fe.call(obj, 2, 5);<br>
+• 特殊情况：<br>
+fe.call(null, 1, 2);<br>
+fe.call(undefined, 1, 2);<br>
+fe.call();<br>
+// call的第一个参数传递 null、undefined、或者不传时函数的this是window</li>
+<li>apply 修改函数中的this关键字<br>
+• 语法：函数名.apply(ctx, [实参1， 实参2....])<br>
+• 参数：ctx 将函数中的this修改为ctx；第二个参数是一个数组，数组项都是传递给函数的实参；<br>
+• 作用：修改函数中的this关键字，并且把接收一个由实参组成的数组，最后把这个数组项作为实参传给函数，并且让函数执行<br>
+fe.apply(obj, [12, 13]); // 虽然这里传递了一个数组给函数，但是函数接收到的仍然是一个一个的实参<br>
+• call 和apply的区别：二者都是用来修改函数中的this关键字的；但是二者最后给函数传递实参的方式不同，call是一个一个的传递，apply是把实参放到一个数组中打包传递给函数。<br>
+bind 修改函数中的this关键字（绑定this关键字）：<br>
+Function.prototype.bind<br>
+• 语法：函数.bind(ctx, 实参1, 实参2....)<br>
+• 作用：绑定函数中的this关键字，并且返回一个绑定了this的新函数；注意：bind不会让函数执行<br>
+function f(a, b, c) {<br>
+console.log(a, b, c);<br>
+console.log('ff', this);<br>
+return a + b + c;<br>
+}<br>
+let obj2 = {<br>
+college: 'x'<br>
+};<br>
+let f2 = f.bind(obj2);<br>
+console.log(f2 === f); // false<br>
+f2(1, 2, 3);<br>
+f2(1, 3, 5);<br>
+console.log(f2);<br>
+bind还有一个作用：绑定函数的参数<br>
+let f3 = f.bind(obj2, 10, 20);<br>
+f3(13); // 10 20 13<br>
+f3(14); // 10 20 14<br>
+let f4 = f.bind(obj2, 12); // x = 12<br>
+let f5= f4.bind(obj2, 13); // x = 12 y = 13<br>
+let f6 = f5.bind(obj2, 14); // x = 12 y = 13 z = 14<br>
+f6(); // 12 13 14<br>
+bind方法实现函数柯里化<br>
+function sum(a, b, c) {<br>
+return a + b + c;<br>
+}<br>
+function curingSum(a) {<br>
+return function (b) {<br>
+return function (c) {<br>
+return a + b + c;<br>
+}<br>
+}<br>
+}<br>
+curingSum(1)(2)(3);<br>
+let c1 = sum.bind(null, 1);<br>
+let c2 = c1.bind(null, 2);<br>
+let c3 = c2.bind(null, 3);<br>
+let r = c3();<br>
+console.log(r); //6</li>
+</ol>
 ]]></content>
     </entry>
     <entry>

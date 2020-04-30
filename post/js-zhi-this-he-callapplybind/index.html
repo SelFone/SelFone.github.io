@@ -1,0 +1,242 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JS 之 this和call、apply、bind | Gridea</title>
+<meta name="description" content="温故而知新" />
+<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588214095107">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="http://toolman.live/styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="http://toolman.live">
+  <img class="avatar" src="http://toolman.live/images/avatar.png?v=1588214095107" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              JS 之 this和call、apply、bind
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-30
+              </span>
+              <span>
+                4 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>this<br>
+是js代码执行时的环境对象，一般在函数中使用，在函数执行时，根据函数的调用方式不同而不同，在运行时不能通过赋值的方式修改；、</p>
+<ol>
+<li>this的常见情况</li>
+<li>事件中的this是绑定当前事件的元素；</li>
+<li>自执行函数中的this指向全局（浏览器端window）；</li>
+<li>定时器回调函数中的this指向全局（浏览器端window）；</li>
+<li>全局作用域的this指向全局（浏览器端window）</li>
+<li>方法调用时看方法执行前有没有点，如果有，点前面是谁this就是谁，没有就是全局（浏览器端window）</li>
+<li>箭头函数中的this是箭头函数声明时所在作用域中的this</li>
+<li>构造函数中的this指向当前实例<br>
+• Function.prototype 上的三个方法call、apply、bind 供Function的实例用来修改函数中的this指向<br>
+console.log(Function.prototype);</li>
+<li>call Function.prototype.call<br>
+function fe(a, b) {<br>
+console.log(a, b);<br>
+console.log(this);<br>
+}<br>
+fe(1, 2); // this -&gt; window<br>
+• 使用call方法修改this<br>
+• 语法：函数名.call(ctx, 实参1, 实参2.....)<br>
+• 参数：ctx 将函数中的this修改为ctx; 从第二个参数开始，后面的参数都是传递给函数执行的实参<br>
+• 作用: 修改方法中的关键字为call方法的第一个实参ctx,并且把后面的参数当做实参传给函数，最后让函数执行；<br>
+var obj = {<br>
+id: '0511120117'<br>
+};<br>
+fe.call(obj, 2, 5);<br>
+• 特殊情况：<br>
+fe.call(null, 1, 2);<br>
+fe.call(undefined, 1, 2);<br>
+fe.call();<br>
+// call的第一个参数传递 null、undefined、或者不传时函数的this是window</li>
+<li>apply 修改函数中的this关键字<br>
+• 语法：函数名.apply(ctx, [实参1， 实参2....])<br>
+• 参数：ctx 将函数中的this修改为ctx；第二个参数是一个数组，数组项都是传递给函数的实参；<br>
+• 作用：修改函数中的this关键字，并且把接收一个由实参组成的数组，最后把这个数组项作为实参传给函数，并且让函数执行<br>
+fe.apply(obj, [12, 13]); // 虽然这里传递了一个数组给函数，但是函数接收到的仍然是一个一个的实参<br>
+• call 和apply的区别：二者都是用来修改函数中的this关键字的；但是二者最后给函数传递实参的方式不同，call是一个一个的传递，apply是把实参放到一个数组中打包传递给函数。<br>
+bind 修改函数中的this关键字（绑定this关键字）：<br>
+Function.prototype.bind<br>
+• 语法：函数.bind(ctx, 实参1, 实参2....)<br>
+• 作用：绑定函数中的this关键字，并且返回一个绑定了this的新函数；注意：bind不会让函数执行<br>
+function f(a, b, c) {<br>
+console.log(a, b, c);<br>
+console.log('ff', this);<br>
+return a + b + c;<br>
+}<br>
+let obj2 = {<br>
+college: 'x'<br>
+};<br>
+let f2 = f.bind(obj2);<br>
+console.log(f2 === f); // false<br>
+f2(1, 2, 3);<br>
+f2(1, 3, 5);<br>
+console.log(f2);<br>
+bind还有一个作用：绑定函数的参数<br>
+let f3 = f.bind(obj2, 10, 20);<br>
+f3(13); // 10 20 13<br>
+f3(14); // 10 20 14<br>
+let f4 = f.bind(obj2, 12); // x = 12<br>
+let f5= f4.bind(obj2, 13); // x = 12 y = 13<br>
+let f6 = f5.bind(obj2, 14); // x = 12 y = 13 z = 14<br>
+f6(); // 12 13 14<br>
+bind方法实现函数柯里化<br>
+function sum(a, b, c) {<br>
+return a + b + c;<br>
+}<br>
+function curingSum(a) {<br>
+return function (b) {<br>
+return function (c) {<br>
+return a + b + c;<br>
+}<br>
+}<br>
+}<br>
+curingSum(1)(2)(3);<br>
+let c1 = sum.bind(null, 1);<br>
+let c2 = c1.bind(null, 2);<br>
+let c3 = c2.bind(null, 3);<br>
+let r = c3();<br>
+console.log(r); //6</li>
+</ol>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="http://toolman.live/post/hello-gridea/">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | 
+  <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
