@@ -1,18 +1,15 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
+    <meta charset="utf-8" >
 
 <title>欢迎进入 2020 数据可视化智能研发时代 | ToolMan</title>
 <meta name="description" content="既知才疏，又然学浅">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588409636037">
+<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588409706692">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="http://toolman.live/styles/main.css">
 
@@ -21,85 +18,88 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 
 
   </head>
   <body>
     <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="http://toolman.live">
-        <img class="avatar" src="http://toolman.live/images/avatar.png?v=1588409636037" alt="" width="32px" height="32px">
-      </a>
-      <a href="http://toolman.live">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://toolman.live">
+        <img src="http://toolman.live/images/avatar.png?v=1588409706692" class="site-logo">
         <h1 class="site-title">ToolMan</h1>
       </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
+    <div>
       
         
-          <a href="/" class="menu purple-link">
+          <a href="/" class="site-nav">
             首页
           </a>
         
       
         
-          <a href="/archives" class="menu purple-link">
+          <a href="/archives" class="site-nav">
             归档
           </a>
         
       
         
-          <a href="/tags" class="menu purple-link">
+          <a href="/tags" class="site-nav">
             标签
           </a>
         
       
         
-          <a href="/post/about" class="menu purple-link">
+          <a href="/post/about" class="site-nav">
             关于
           </a>
         
       
     </div>
   </div>
-</transition>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      既知才疏，又然学浅
+    </div>
+    <div class="site-footer">
+      Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
 
 
-      <div class="content-container">
-        <div class="post-detail">
-          
-            <div class="feature-container" style="background-image: url('http://toolman.live/post-images/huan-ying-jin-ru-2020-shu-ju-ke-shi-hua-zhi-neng-yan-fa-shi-dai.png')">
-            </div>
-          
-          <h2 class="post-title">欢迎进入 2020 数据可视化智能研发时代</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-05-02</span>
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">欢迎进入 2020 数据可视化智能研发时代</h2>
+            <div class="post-date">2020-05-02</div>
             
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="http://toolman.live/tag/tTBmKiGoj/">
-                    语雀
-                    
-                  </a>
-                
-              </span>
+              <div class="feature-container" style="background-image: url('http://toolman.live/post-images/huan-ying-jin-ru-2020-shu-ju-ke-shi-hua-zhi-neng-yan-fa-shi-dai.png')">
+              </div>
             
-          </div>
-          <div class="post-content">
-            <p>导读<br>
+            <div class="post-content">
+              <p>导读<br>
 数据时代一个显著特征是数据可视化的崛起，被誉为大数据分析应用领域里的最后一公里，数据可视化将数据分析、工程技术与设计艺术结合，借助图形化的手段，用比文字快十倍甚至万倍的速度清晰有效地传达信息，让人们可以利用人类经历漫长进化得来的强大视觉化思考本能去对所呈现数据进行挖掘、整合，得以辅助分析和决策。<br>
 早在 300 年前折线图、柱形图、饼图被发明，时至今日有了纷繁多样的数据可视化表现形态，而生产方式也从原始手绘到今天可以通过代码、工具自动生成，数据可视化领域跟过去相比已经有了翻天覆地的变化，特别是最近10年，随着 D3（D3: Data-Driven Documents IEEE InfoVis 2011） 以及大量统计图表类库和工具出现，让数据可视化设计和生产门槛大幅降低。<br>
 伴随数据可视化的价值越来越被人们认可以及生产工具的普惠，越来越多设计师、工程师、产品经理开始接触这个领域，甚至可以说在现代化的 Web 系统中已经很少有不含任何数据可视化成分。作为这个专业领域的研发人员，我们一直在思考如何让这个研发成本更低，在如今可视化类库已经工程成熟、理论完备的当下，也许可以往智能化方向去寻求突破。<br>
@@ -186,43 +186,40 @@ AVA 是一个智能可视分析框架，包含研发时的智能研发向导，�
 • 2020.01.04 SEE Conf 2020 - 智能可视化体系 AVA<br>
 • 2019.11.22 知源 · 致远 - AntV 11.22 年度发布</p>
 
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://toolman.live/tag/tTBmKiGoj/" class="tag">
+                    语雀
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/">
+                  <h3 class="post-title">
+                    体验科技与好的产品-语雀热门文章
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
           </div>
+
         </div>
-
-        
-          <div class="next-post">
-            <a class="purple-link" href="http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/">
-              <h3 class="post-title">
-                下一篇：体验科技与好的产品-语雀热门文章
-              </h3>
-            </a>
-          </div>
-          
       </div>
-
-      
-
-      <div class="site-footer">
-  <div class="slogan">既知才疏，又然学浅</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
-</div>
-
-
     </div>
-    <script type="application/javascript">
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
 
 hljs.initHighlightingOnLoad()
 

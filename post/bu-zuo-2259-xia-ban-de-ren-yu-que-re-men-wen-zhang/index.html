@@ -1,18 +1,15 @@
-
 <!DOCTYPE html>
 <html>
   <head>
-    
-<meta charset="utf-8" >
+    <meta charset="utf-8" >
 
 <title>不做22:59下班的人-语雀热门文章 | ToolMan</title>
 <meta name="description" content="既知才疏，又然学浅">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588409636037">
+<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588409706692">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="http://toolman.live/styles/main.css">
 
@@ -21,85 +18,88 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
 
 
   </head>
   <body>
     <div id="app" class="main">
-      <div class="site-header-container">
-  <div class="site-header">
-    <div class="left">
-      <a href="http://toolman.live">
-        <img class="avatar" src="http://toolman.live/images/avatar.png?v=1588409636037" alt="" width="32px" height="32px">
-      </a>
-      <a href="http://toolman.live">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="http://toolman.live">
+        <img src="http://toolman.live/images/avatar.png?v=1588409706692" class="site-logo">
         <h1 class="site-title">ToolMan</h1>
       </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
     </div>
-    <div class="right">
-      <transition name="fade">
-        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
-      </transition>
-    </div>
-  </div>
-</div>
-
-<transition name="fade">
-  <div class="menu-container" style="display: none;" v-show="menuVisible">
-    <div class="menu-list">
+    <div>
       
         
-          <a href="/" class="menu purple-link">
+          <a href="/" class="site-nav">
             首页
           </a>
         
       
         
-          <a href="/archives" class="menu purple-link">
+          <a href="/archives" class="site-nav">
             归档
           </a>
         
       
         
-          <a href="/tags" class="menu purple-link">
+          <a href="/tags" class="site-nav">
             标签
           </a>
         
       
         
-          <a href="/post/about" class="menu purple-link">
+          <a href="/post/about" class="site-nav">
             关于
           </a>
         
       
     </div>
   </div>
-</transition>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      既知才疏，又然学浅
+    </div>
+    <div class="site-footer">
+      Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
 
 
-      <div class="content-container">
-        <div class="post-detail">
-          
-            <div class="feature-container" style="background-image: url('http://toolman.live/post-images/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang.webp')">
-            </div>
-          
-          <h2 class="post-title">不做22:59下班的人-语雀热门文章</h2>
-          <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2020-05-02</span>
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">不做22:59下班的人-语雀热门文章</h2>
+            <div class="post-date">2020-05-02</div>
             
-              <span>
-                <i class="icon-pricetags-outline"></i>
-                
-                  <a href="http://toolman.live/tag/tTBmKiGoj/">
-                    语雀
-                    
-                  </a>
-                
-              </span>
+              <div class="feature-container" style="background-image: url('http://toolman.live/post-images/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang.webp')">
+              </div>
             
-          </div>
-          <div class="post-content">
-            <p>网上有一个段子：一天24小时，可到了我这里，时间就好像缩了一半。明明好像没干什么，可就是觉得没时间，工作没时间，休息没时间。前段时间，一则数据曝光：除去工作和睡觉，中国人日平均休闲时间是2.27小时，远低于欧美国家。时间自由，成了当代成年人最大的奢侈品。<br>
+            <div class="post-content">
+              <p>网上有一个段子：一天24小时，可到了我这里，时间就好像缩了一半。明明好像没干什么，可就是觉得没时间，工作没时间，休息没时间。前段时间，一则数据曝光：除去工作和睡觉，中国人日平均休闲时间是2.27小时，远低于欧美国家。时间自由，成了当代成年人最大的奢侈品。<br>
 很多时候，我们苦恼着时间不够，却忽略了时间自由的本质。其实，时间是需要自己掌控的，不自律，不规划，又怎能拥有时间自由？<br>
 2.27个小时<br>
 前天晚上11点多，我刚关灯准备睡觉，手机突然收到了一条微信消息。</p>
@@ -201,43 +201,40 @@
 <p>如果你的时间颗粒度是1天，那么1个小时2个小时的虚度对你来说并不算什么，而如果你的时间颗粒度是15分钟，做事的紧迫感就会大大提升，因为每一分钟对你来说价值都很高。当你有意识地观察、并细化自己的时间颗粒度的时候，你就能感受到一天就像四十八小时似的。<br>
 你是“22:59”下班的人吗？其实，不在于几点下班，而在于你怎么看到和对待那些属于你自己的时间。</p>
 
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="http://toolman.live/tag/tTBmKiGoj/" class="tag">
+                    语雀
+                  </a>
+                
+              </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/">
+                  <h3 class="post-title">
+                    Git第一次提交代码教程
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
           </div>
+
         </div>
-
-        
-          <div class="next-post">
-            <a class="purple-link" href="http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/">
-              <h3 class="post-title">
-                下一篇：Git第一次提交代码教程
-              </h3>
-            </a>
-          </div>
-          
       </div>
-
-      
-
-      <div class="site-footer">
-  <div class="slogan">既知才疏，又然学浅</div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
-  </div>
-  Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
-</div>
-
-
     </div>
-    <script type="application/javascript">
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
 
 hljs.initHighlightingOnLoad()
 
