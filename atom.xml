@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://toolman.live</id>
     <title>ToolMan</title>
-    <updated>2020-05-02T08:32:56.592Z</updated>
+    <updated>2020-05-02T08:42:27.888Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://toolman.live"/>
     <link rel="self" href="http://toolman.live/atom.xml"/>
@@ -10,6 +10,17 @@
     <logo>http://toolman.live/images/avatar.png</logo>
     <icon>http://toolman.live/favicon.ico</icon>
     <rights>All rights reserved 2020, ToolMan</rights>
+    <entry>
+        <title type="html"><![CDATA[第三届 SEE Conf 2020 视频回放 && PPT-语雀热门文章]]></title>
+        <id>http://toolman.live/post/di-san-jie-see-conf-2020-shi-pin-hui-fang-and-ppt-yu-que-re-men-wen-zhang/</id>
+        <link href="http://toolman.live/post/di-san-jie-see-conf-2020-shi-pin-hui-fang-and-ppt-yu-que-re-men-wen-zhang/">
+        </link>
+        <updated>2020-05-02T08:39:27.000Z</updated>
+        <summary type="html"><![CDATA[<p>会议介</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>会议介</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[JS面试题-基础]]></title>
         <id>http://toolman.live/post/js-mian-shi-ti-ji-chu/</id>
