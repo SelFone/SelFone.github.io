@@ -1,100 +1,105 @@
+
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>体验科技与好的产品-语雀热门文章 | ToolMan</title>
 <meta name="description" content="既知才疏，又然学浅">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588409541872">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588409636037">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="http://toolman.live/styles/main.css">
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
   </head>
   <body>
-  
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="http://toolman.live">ToolMan</a></h3>
-  </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        
-          <li>
-            
-              <a href="/" class="menu">
-                首页
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/archives" class="menu">
-                归档
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/tags" class="menu">
-                标签
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/post/about" class="menu">
-                关于
-              </a>
-            
-          </li>
-        
-      </ul>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://toolman.live">
+        <img class="avatar" src="http://toolman.live/images/avatar.png?v=1588409636037" alt="" width="32px" height="32px">
+      </a>
+      <a href="http://toolman.live">
+        <h1 class="site-title">ToolMan</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
     </div>
   </div>
-</nav>
+</div>
 
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          <article class="article">
-            <h1>体验科技与好的产品-语雀热门文章</h1>
-            <p class="article-meta">
-              2020-05-02
-              
-                <a href="http://toolman.live/tag/tTBmKiGoj/" class="badge ">
-                  语雀
-                </a>
-              
-            </p>
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('http://toolman.live/post-images/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang.png')">
+            </div>
+          
+          <h2 class="post-title">体验科技与好的产品-语雀热门文章</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2020-05-02</span>
             
-              <img src="http://toolman.live/post-images/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang.png" alt="体验科技与好的产品-语雀热门文章">
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="http://toolman.live/tag/tTBmKiGoj/">
+                    语雀
+                    
+                  </a>
+                
+              </span>
             
-            <div class="post-content">
-              <p>各位嘉宾，各位朋友，大家好。欢迎参加第三届蚂蚁金服体验科技大会。在大会开始，我给大家分享下体验科技与好的产品之间有什么关联。<br>
+          </div>
+          <div class="post-content">
+            <p>各位嘉宾，各位朋友，大家好。欢迎参加第三届蚂蚁金服体验科技大会。在大会开始，我给大家分享下体验科技与好的产品之间有什么关联。<br>
 去年的分享里，我给大家讲过杭州一家医院的挂号系统和开药系统。这些系统极大方便了老百姓，挂号系统让我们的排队成本急剧降低，开药系统让医生的工作轻松了不少。但如图所示，面对这些新系统，很多父母老人家依旧还不知道怎么用，开药系统也需要给医生培训多次。社会上的大量 SaaS 系统还处于勉强能用状态，离易用和好用还有很大距离。<br>
 必须肯定的是，无论在医院，还是企业单位，这些从无到有的产品，都极大提高了社会的整体运行效率。阿里巴巴早期的绩效薪资等内部系统，和上图中的开药系统也没什么区别，一个界面上堆积很多功能，需要仔细对照说明文档一步步操作下去才行，很多地方甚至需导出 Excel 进行本地操作。当年这些内部系统，有些同事甚至用得想离职。<br>
 2014 年起，阿里开始提倡“大中台、小前台”，中后台的产品体验越来越受重视。也是在 2014 年，我们开始着手发起开源的 Ant Design 项目，除了提高研发效率，Ant Design 更大一个作用是，让内部各种产品的颜值有了很大提升。颜值不仅仅关于视觉呈现，也需要从信息架构、功能排布等很多方面对产品进行重构。很惊喜的是，就这几年时间里，有大量产品采用 Ant Design，颜值焕然一新。<br>
@@ -120,163 +125,52 @@
 玉伯<br>
 📎SEE Conf 2020_体验科技与好的产品_玉伯.pdf📎SEE Conf 2020_体验科技与好的产品_玉伯.key</p>
 
-            </div>
-          </article>
+          </div>
         </div>
-        <div class="paper" data-aos="fade-in">
-          
-            <div class="next-post">
-              <div class="next">
-                下一篇
-              </div>
-              <a href="http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/">
-                <h3 class="post-title">
-                  企业微信和钉钉在PK什么？-语雀热门文章
-                </h3>
-              </a>
-            </div>
-          
-        </div>
+
         
+          <div class="next-post">
+            <a class="purple-link" href="http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/">
+              <h3 class="post-title">
+                下一篇：企业微信和钉钉在PK什么？-语雀热门文章
+              </h3>
+            </a>
+          </div>
+          
       </div>
 
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="http://toolman.live/images/avatar.png?v=1588409541872" class="no-responsive avatar">
-    <div class="text-muted">既知才疏，又然学浅</div>
-    <div class="social-container">
       
-        
+
+      <div class="site-footer">
+  <div class="slogan">既知才疏，又然学浅</div>
+  <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-    </div>
+    
   </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="http://toolman.live/post/huan-ying-jin-ru-2020-shu-ju-ke-shi-hua-zhi-neng-yan-fa-shi-dai/">欢迎进入 2020 数据可视化智能研发时代</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/">体验科技与好的产品-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/">企业微信和钉钉在PK什么？-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/">2019-D2晚会前端分享记录-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang/">不做22:59下班的人-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/">Git第一次提交代码教程</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/di-san-jie-see-conf-2020-shi-pin-hui-fang-and-ppt-yu-que-re-men-wen-zhang/">第三届 SEE Conf 2020 视频回放 &amp;&amp; PPT-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/js-mian-shi-ti-ji-chu/">JS面试题-基础</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/zheng-ze-biao-da-shi/">正则表达式</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/qian-kao-bei-he-shen-kao-bei/">浅拷贝和深拷贝</a>
-            </li>
-          
-        
-          
-        
-          
-        
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-        <a href="http://toolman.live/tag/tTBmKiGoj/" class="badge success">
-          语雀
-        </a>
-      
-        <a href="http://toolman.live/tag/DWroS-82n/" class="badge ">
-          前端
-        </a>
-      
-        <a href="http://toolman.live/tag/wIW593qVj/" class="badge warning">
-          面试
-        </a>
-      
-        <a href="http://toolman.live/tag/u1jSvmmAc/" class="badge success">
-          JavaScript
-        </a>
-      
-        <a href="http://toolman.live/tag/UiZeWWb1E/" class="badge ">
-          Gridea
-        </a>
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
-  </div>
+  Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
 </div>
 
 
     </div>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-<script type="application/javascript">
-
-AOS.init();
+    <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 

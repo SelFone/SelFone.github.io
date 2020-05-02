@@ -1,285 +1,184 @@
-<!DOCTYPE html>
+
 <html>
   <head>
-    <meta charset="utf-8" >
+    
+<meta charset="utf-8" >
 
 <title>ToolMan</title>
 <meta name="description" content="既知才疏，又然学浅">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588409541872">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588409636037">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="http://toolman.live/styles/main.css">
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 
-
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 
   </head>
   <body>
-    <nav class="navbar border fixed split-nav">
-  <div class="nav-brand">
-    <h3><a href="http://toolman.live">ToolMan</a></h3>
-  </div>
-  <div class="collapsible">
-    <input id="collapsible1" type="checkbox" name="collapsible1">
-    <button>
-      <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </label>
-    </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        
-          <li>
-            
-              <a href="/" class="menu">
-                首页
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/archives" class="menu">
-                归档
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/tags" class="menu">
-                标签
-              </a>
-            
-          </li>
-        
-          <li>
-            
-              <a href="/post/about" class="menu">
-                关于
-              </a>
-            
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-    <div id="top" class="row site">
-      <div class="sm-12 md-8 col">
-        <div class="paper">
-          
-  <article class="article">
-    <h2 class="article-title">
-      <a href="http://toolman.live/post/js-zhi-this-he-callapplybind/">JS 之 this和call、apply、bind</a>
-    </h2>
-    <p class="article-meta">
-      2020-04-30
-      
-        <a href="http://toolman.live/tag/u1jSvmmAc/" class="badge success">
-          JavaScript
-        </a>
-      
-    </p>
-    <p class="text-lead">
-      
-    </p>
-    <div class="row">
-      <a href="http://toolman.live/post/js-zhi-this-he-callapplybind/" class="readmore-link">
-        <button>
-          Read More
-        </button>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="http://toolman.live">
+        <img class="avatar" src="http://toolman.live/images/avatar.png?v=1588409636037" alt="" width="32px" height="32px">
+      </a>
+      <a href="http://toolman.live">
+        <h1 class="site-title">ToolMan</h1>
       </a>
     </div>
-  </article>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
 
-  <article class="article">
-    <h2 class="article-title">
-      <a href="http://toolman.live/post/hello-gridea/">Hello Gridea</a>
-    </h2>
-    <p class="article-meta">
-      2018-12-12
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
       
-        <a href="http://toolman.live/tag/UiZeWWb1E/" class="badge secondary">
-          Gridea
-        </a>
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
       
-    </p>
-    <p class="text-lead">
-      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        
+        
+<section class="post-item">
+    <div class="content">
+      <a href="http://toolman.live/post/js-zhi-this-he-callapplybind/">
+        <h2 class="post-title">JS 之 this和call、apply、bind</h2>
+      </a>
+      <div class="post-abstract">
+        
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2020-04-30</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="http://toolman.live/tag/u1jSvmmAc/">
+                JavaScript
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="http://toolman.live/post/hello-gridea/">
+        <h2 class="post-title">Hello Gridea</h2>
+      </a>
+      <div class="post-abstract">
+        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
 ✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
 
-    </p>
-    <div class="row">
-      <a href="http://toolman.live/post/hello-gridea/" class="readmore-link">
-        <button>
-          Read More
-        </button>
-      </a>
-    </div>
-  </article>
-
-
-        </div>
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2018-12-12</span>
         
-        <div class="row flex-edges">
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="http://toolman.live/tag/UiZeWWb1E/">
+                Gridea
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+      <a href="http://toolman.live/post/hello-gridea/">
+        <div class="feature-container" style="background-image: url('http://toolman.live/post-images/hello-gridea.png')">
+        </div>
+      </a>
+    
+  </section>
+
+
+<div class="pagination-container">
   
-    <a href="http://toolman.live/" class="paper-btn">
-      上一页
-    </a>
+    <a href="http://toolman.live/" class="prev"><i class="icon-arrow-ios-back-outline"></i> 上一页</a>
   
   
 </div>
+
 
       </div>
+
+      <div class="site-footer">
+  <div class="slogan">既知才疏，又然学浅</div>
+  <div class="social-container">
+    
       
-      <div class="sm-12 md-4 col sidebar">
-  <div class="paper info-container">
-    <img src="http://toolman.live/images/avatar.png?v=1588409541872" class="no-responsive avatar">
-    <div class="text-muted">既知才疏，又然学浅</div>
-    <div class="social-container">
+    
       
-        
+    
       
-        
+    
       
-        
+    
       
-        
-      
-        
-      
-    </div>
+    
   </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      最新文章
-    </div>
-    <div class="row">
-      <ul>
-        
-          
-            <li>
-              <a href="http://toolman.live/post/huan-ying-jin-ru-2020-shu-ju-ke-shi-hua-zhi-neng-yan-fa-shi-dai/">欢迎进入 2020 数据可视化智能研发时代</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/">体验科技与好的产品-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/">企业微信和钉钉在PK什么？-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/">2019-D2晚会前端分享记录-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang/">不做22:59下班的人-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/">Git第一次提交代码教程</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/di-san-jie-see-conf-2020-shi-pin-hui-fang-and-ppt-yu-que-re-men-wen-zhang/">第三届 SEE Conf 2020 视频回放 &amp;&amp; PPT-语雀热门文章</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/js-mian-shi-ti-ji-chu/">JS面试题-基础</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/zheng-ze-biao-da-shi/">正则表达式</a>
-            </li>
-          
-        
-          
-            <li>
-              <a href="http://toolman.live/post/qian-kao-bei-he-shen-kao-bei/">浅拷贝和深拷贝</a>
-            </li>
-          
-        
-          
-        
-          
-        
-          
-        
-      </ul>
-    </div>
-  </div>
-  <div class="paper">
-    <div class="sidebar-title">
-      标签列表
-    </div>
-    <div class="row">
-      
-        <a href="http://toolman.live/tag/tTBmKiGoj/" class="badge ">
-          语雀
-        </a>
-      
-        <a href="http://toolman.live/tag/DWroS-82n/" class="badge ">
-          前端
-        </a>
-      
-        <a href="http://toolman.live/tag/wIW593qVj/" class="badge secondary">
-          面试
-        </a>
-      
-        <a href="http://toolman.live/tag/u1jSvmmAc/" class="badge success">
-          JavaScript
-        </a>
-      
-        <a href="http://toolman.live/tag/UiZeWWb1E/" class="badge success">
-          Gridea
-        </a>
-      
-    </div>
-  </div>
-  <div class="paper">
-    Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
-  </div>
+  Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
 </div>
 
+
     </div>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-<script type="application/javascript">
-
-AOS.init();
+    <script type="application/javascript">
 
 hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
