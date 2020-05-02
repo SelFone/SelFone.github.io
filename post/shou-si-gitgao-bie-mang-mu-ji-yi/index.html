@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>手撕Git，告别盲目记忆 | ToolMan</title>
+<meta name="description" content="既知才疏，又然学浅">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="http://toolman.live/favicon.ico?v=1588411603922">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="http://toolman.live/styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="http://toolman.live">ToolMan</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>手撕Git，告别盲目记忆</h1>
+            <p class="article-meta">
+              2020-04-30
+              
+            </p>
+            
+            <div class="post-content">
+              <p>引言<br>
+Git在工作中经常用到，但是指令太多，网上的说法又不太通俗。总会让想要学习的同学抓不到重点，或者望而却步。这篇文章的目的就是希望读后能够按照原理，系统地记忆一些常用/关键的命令。也算是我这个刚入互联网的小白对社会的一些小小福报～<br>
+其中若有不当之处，欢迎大佬指出。<br>
+开局一个赞 ，内容一看就懂～<br>
+友情提示：文章有连贯性，跳着看可能会比较蛋疼......</p>
+<p>文章导读<br>
+Git的分区（工作区，暂存区，版本库）<br>
+Git的原理<br>
+Git分支<br>
+版本的回滚（revert，reset）<br>
+代码暂存（stash）<br>
+小概述-何为Git<br>
+Git是一个分布式版本控制系统，为了快速高效地处理小到大型项目的所有内容。通过对信息的压缩和摘要，使得所占空间非常小，但能够支持项目版本迅速迭代的开发工具。<br>
+一、Git的分区<br>
+本章主要从基础入手，先介绍git的分区。</p>
+<p>1.1 三大分区</p>
+<p>工作区，也叫Working Directory<br>
+暂存区，也叫stage，index<br>
+版本库，也叫本地仓库，commit History<br>
+当我们把代码从git hub档下来或者说初始化git项目后，便有了这三个分区的概念。</p>
+<p>文件在Git不同分区中的表现<br>
+工作区<br>
+工作区应该不陌生，就是我们能看见，直接编辑的区域。对于一些新增的文件，如果没有被add到暂存区，就会以红色的形式放置在工作区。</p>
+<p>暂存区<br>
+数据暂时存放的区域，对于add git版本控制的文件，就算是进入暂存区啦。可以理解为数据进入本地代码仓库之前存放的区域。由于还没对本地仓库生效，所以是数据暂时存放的区域。</p>
+<p>对暂存区的文件修改后，会以蓝色的形式显示。如果第一次创建并add到暂存区的文件，由于远程仓库没有同步，所以会显示绿色。</p>
+<p>注：存放在 &quot;.git目录下&quot; 下的index文件（.git/index）中</p>
+<p>版本库<br>
+在暂存区commit的代码会被放入版本库中。可以理解为一个本地的代码仓库，push的时候，才会把版本库的数据全都发送到远程仓库中。</p>
+<p>注：存放在工作区中“.git”目录下。</p>
+<p>图片来源于网络<br>
+扩展阅读：<br>
+https://juejin.im/post/5b6c4eeff265da0f4d0da3fa<br>
+https://www.runoob.com/git/git-workspace-index-repo.html</p>
+<p>1.2 涉及指令<br>
+1.2.1 分区转换指令</p>
+<p>git add<br>
+数据从工作区转移至暂存区</p>
+<p>git commit<br>
+数据从暂存区转移至版本库，也就是本地仓库</p>
+<p>git push<br>
+数据从版本库中发送到远程仓库</p>
+<p>指令太多？一张图就能记下～</p>
+<p>1.2.2 分区对比指令</p>
+<p>git diff<br>
+工作区与暂存区对比</p>
+<p>git diff head<br>
+工作区与版本库对比</p>
+<p>git diff --cached<br>
+暂存区与版本库对比</p>
+<p>指令太多？一张图就能记下～</p>
+<p>二、Git的原理<br>
+操作Git代码库前，一定要了解Git是怎么记录每次提交的代码变化的？换句话说，每一次commit在保证开发效率的前提下，都提交了什么？</p>
+<p>2.1 git如何存储文件/目录信息<br>
+首先我们使用git init，初始化一个新的git项目。这个目录会在项目的根目录下创建.git的隐藏目录，相信大家都不陌生。</p>
+<p>MacBook-Pro:wuya eleme$ git init<br>
+已初始化空的 Git 仓库于 /Users/eleme/wuya/.git/<br>
+然后查看一下.git的目录树</p>
+<p>MacBook-Pro:wuya eleme$ tree -a<br>
+.<br>
+└── .git<br>
+├── HEAD<br>
+├── config<br>
+├── description<br>
+├── hooks<br>
+│   ├── applypatch-msg.sample<br>
+│   ├── commit-msg.sample<br>
+│   ├── fsmonitor-watchman.sample<br>
+│   ├── post-update.sample<br>
+│   ├── pre-applypatch.sample<br>
+│   ├── pre-commit.sample<br>
+│   ├── pre-push.sample<br>
+│   ├── pre-rebase.sample<br>
+│   ├── pre-receive.sample<br>
+│   ├── prepare-commit-msg.sample<br>
+│   └── update.sample<br>
+├── info<br>
+│   └── exclude<br>
+├── objects<br>
+│   ├── info<br>
+│   └── pack<br>
+└── refs<br>
+├── heads<br>
+└── tags</p>
+<p>9 directories, 15 files<br>
+我们会发现，有一个叫Objects的目录。这个目录就是存储文件变化的核心。我们往工作区中存入一个测试文件a.md和一个test文件夹并查看objects发生的变化。</p>
+<p>MacBook-Pro:wuya eleme$ echo 'test1' &gt; a.md<br>
+MacBook-Pro:wuya eleme$ mkdir test<br>
+MacBook-Pro:wuya eleme$ echo 'test2' &gt; test/b.md<br>
+MacBook-Pro:wuya eleme$ git add a.md test<br>
+MacBook-Pro:wuya eleme$ tree -a .git/objects<br>
+.git/objects<br>
+├── 18<br>
+│   └── 0cf8328022becee9aaa2577a8f84ea2b9f3827<br>
+├── 9d<br>
+│   └── aeafb9864cf43055ae93beb0afd6c7d144bfa4<br>
+├── info<br>
+└── pack</p>
+<p>4 directories, 2 files<br>
+注意，文件夹放入到暂存区后，并不会马上在objects中显示，commit后才会。此时多了两个文件，其实就是修改过的两个文件以及修改内容。</p>
+<p>Objects下存放的文件名就是根据SHA1算法哈希的“指纹”，为了能够在本仓库中和其他文件区分出来。文件内容就是Git将信息压缩后形成的二进制文件。<br>
+通过git cat-file [-t] [-p]，可以看到Object的类型与文件的内容。</p>
+<p>MacBook-Pro:wuya eleme$ git cat-file -t 9dae<br>
+blob<br>
+MacBook-Pro:wuya eleme$ git cat-file -p 9dae<br>
+test1<br>
+通过git hash-object a.md能够显示该文件在本仓库生成的hash值，与之前的目录树显示是对应的。</p>
+<p>MacBook-Pro:wuya eleme$ git hash-object a.md<br>
+9daeafb9864cf43055ae93beb0afd6c7d144bfa4<br>
+2.2 git Object的类型<br>
+git Object有三种类型：</p>
+<p>Blob<br>
+Tree<br>
+Commit<br>
+简单来说，文件都被存储为Blob类型，文件夹则为Tree类型，每次提交的节点被存储为Commit类型数据。因此，Git会以这三种类型来存储我们的文件。简单看下目录存储的映射关系：</p>
+<p>初步猜想，如果把这些文件都commit到代码库，objects目录应该会有4个目录。即2个blob，1个tree，1个commit。</p>
+<p>MacBook-Pro:wuya eleme$ git commit -a -m &quot;加入到代码库中，观察objects目录变化&quot;<br>
+[master（根提交） a16b538] 加入到代码库中，观察objects目录变化<br>
+2 files changed, 2 insertions(+)<br>
+create mode 100644 a.md<br>
+create mode 100644 test/b.md<br>
+MacBook-Pro:wuya eleme$ tree -a .git/objects<br>
+.git/objects<br>
+├── 18<br>
+│   └── 0cf8328022becee9aaa2577a8f84ea2b9f3827<br>
+├── 21<br>
+│   └── d0758079bdf2c8f7514687174454c804eb0c74<br>
+├── 9d<br>
+│   └── aeafb9864cf43055ae93beb0afd6c7d144bfa4<br>
+├── a1<br>
+│   └── 6b5382a9b646a7df8d21301391f29b2f7bfb65<br>
+├── a7<br>
+│   └── 6c93bb75184ef4b34c88a301c2351ae2219407<br>
+├── info<br>
+└── pack</p>
+<p>7 directories, 5 files<br>
+然鹅事实却是....5个目录！多出的那一个是什么？一个一个输出看看。</p>
+<p>MacBook-Pro:wuya eleme$ git cat-file -p 9dae<br>
+test1<br>
+MacBook-Pro:wuya eleme$ git cat-file -p 180c<br>
+test2<br>
+MacBook-Pro:wuya eleme$ git cat-file -p 21d0<br>
+100644 blob 180cf8328022becee9aaa2577a8f84ea2b9f3827	b.md<br>
+MacBook-Pro:wuya eleme$ git cat-file -p a16b<br>
+tree a76c93bb75184ef4b34c88a301c2351ae2219407<br>
+author eleme <a href="mailto:xxxx@qq.com">xxxx@qq.com</a> 1576979515 +0800<br>
+committer eleme <a href="mailto:xxxx@qq.com">xxxx@qq.com</a> 1576979515 +0800</p>
+<p>加入到代码库中，观察objects目录变化<br>
+MacBook-Pro:wuya eleme$ git cat-file -p a76c<br>
+100644 blob 9daeafb9864cf43055ae93beb0afd6c7d144bfa4	a.md<br>
+040000 tree 21d0758079bdf2c8f7514687174454c804eb0c74	test<br>
+整理一下各自类型：</p>
+<p>9dae-blob<br>
+180c-blob<br>
+21d0-tree<br>
+a16b-commit<br>
+a76c-tree<br>
+仔细一想其实也就通了，两个tree是git根目录和test目录。<br>
+可以得出这样一个结论：每一次commit，都会生成与之对应的commit hash值。查看历史commit也很容易得出这个结论：</p>
+<p>扩展阅读：<br>
+https://mp.weixin.qq.com/s/d4WA02Y22gdWRbmmwfPEHQ</p>
+<p>三、Git分支<br>
+3.1 初探Git分支<br>
+在学习Git分支之前，还是从git的目录树入手。</p>
+<p>MacBook-Pro:wuya eleme$ tree -a .git<br>
+.git<br>
+├── ......<br>
+├── HEAD<br>
+└── refs<br>
+├── heads<br>
+│   └── master<br>
+├── remotes<br>
+│   └── origin<br>
+│       └── HEAD<br>
+└── tags<br>
+不难看出refs目录就是用来记录当前对分支的引用信息，包括本地分支，远程分支，标签。</p>
+<p>heads记录的是本地所有分支，remotes和HEAD一样，指向对应的某个远程分支。</p>
+<p>MacBook-Pro:wuya eleme$ cat .git/refs/heads/master<br>
+a16b5382a9b646a7df8d21301391f29b2f7bfb65<br>
+细心些就会发现，这个hash值就是commit节点的hash值。</p>
+<p>而HEAD就是存储当前在哪个本地分支。查看其内容，可以发现：</p>
+<p>MacBook-Pro:.git eleme$ cat HEAD<br>
+ref: refs/heads/master<br>
+也就意味着，我们在本地的master上。除此之外，还可以通过git branch来创建其他分支。</p>
+<p>MacBook-Pro:.git eleme$ git branch feature/dev<br>
+MacBook-Pro:.git eleme$ git branch feature/wuya<br>
+切换到其他分支并查看分支信息：</p>
+<p>elemedeMacBook-Pro:wuya eleme$ git checkout feature/dev<br>
+切换到分支 'feature/dev'<br>
+elemedeMacBook-Pro:wuya eleme$ git branch -vv</p>
+<ul>
+<li>feature/dev  a16b538 加入到代码库中，观察objects目录变化<br>
+feature/wuya a16b538 加入到代码库中，观察objects目录变化<br>
+master       a16b538 加入到代码库中，观察objects目录变化<br>
+因此可知分支当前的指针指向最近一次commit的节点。通过谁创建的分支，就沿用谁的指针。注：未被放入代码库的文件会在分支切换时被抛弃，造成严重后果。</li>
+</ul>
+<p>3.2 分支的合并<br>
+分支的合并有两种方式，merge和rebase。</p>
+<p>相同点：都是从一个分支获取并合并到当前分支。</p>
+<p>merge：自动创建一个新的commit，如果遇到冲突，仅需要修改后重新commit。</p>
+<p>每次都记录了真实详细的commit，但是在commit频繁的时候，会看到分支比较乱。比如这样，全是merge产生的节点：</p>
+<p>rebase：找公共的节点，直接合并之前commit历史。</p>
+<p>这样能得到简洁的分支发展历史，去掉了merge commit。但是如果合并时出现了问题，没有留下痕迹，不好定位。</p>
+<p>git rebase --abort：遇到冲突时放弃合并，回到rebase操作之前的状态。<br>
+git rebase --continue：合并冲突，结合&quot;git add 文件&quot;命令一起，一步一步地解决冲突。<br>
+git rebase --skip：将引起冲突的commits丢弃掉。<br>
+小例子</p>
+<p>这里引用一个网上归纳的git rebase工作流：</p>
+<p>git rebase<br>
+while(存在冲突) {<br>
+//找到当前冲突文件，编辑解决冲突<br>
+git status<br>
+git add -u<br>
+git rebase --continue<br>
+if( git rebase --abort )<br>
+break;<br>
+}<br>
+注：最好不要在公共分支上使用rebase，如果前后基本上不会有别人改动你的分支，那么推荐rebase。</p>
+<p>扩展阅读：<br>
+https://blog.csdn.net/chenansic/article/details/44122107</p>
+<p>3.3 分支的冲突<br>
+冲突的产生</p>
+<p>冲突是从合并的时候产生的。git分支的合并，其实就是tree和tree的合并。我们在feature/dev上执行git merge master时。git会先找到这两个分支是从哪个指针创建出来的，称之为“merge base”。然后检查这两次的tree是否一致，如果不一致说明一定有文件发生了修改。接下来，对于某一个文件来说，分几种情况：</p>
+<p>文件在节点6，节点3，merge base中的hash值都相同。说明没有被修改过。不会有冲突。<br>
+文件在节点6和merge base或者节点3和merge base的hash值相同时，此时直接更新文件的变化。<br>
+文件在节点6，merge request，master上的hash值都不同，冲突就产生了。<br>
+此时就需要开发人员商定，解决冲突。</p>
+<p>四、版本的回滚<br>
+如果想要版本回退，就离不开reset和revert。</p>
+<p>4.1 revert</p>
+<p>这个就一目了然了，执行git revert后，将回退到上一个commit的版本。</p>
+<p>4.2 reset</p>
+<p>前段时间，线上出了好多空指针的bug，当我查看日志定位到某一代码行时，发现该行定位不到对应的方法中。这时候就必须切换到线上的代码版本进行排查了。</p>
+<p>git reset分为三种模式：</p>
+<p>soft<br>
+mixed<br>
+hard<br>
+由于每一次的commit都会产生与之对应的hash值，所以借助这个进行重置就轻松多了。</p>
+<p>git reset --hard commit的hash值<br>
+会重置暂存区和工作区，完全重置为指定的commit节点。当前分支没有commit的代码必然会被清除。</p>
+<p>git reset --soft commit的hash值<br>
+会保留工作目录，并把指定的commit节点与当前分支的差异都存入暂存区。也就是说，没有被commit的代码也能够保留下来。</p>
+<p>git reset commit的hash值<br>
+不带参数，也就是mixed模式。将会保留工作目录，并且把工作区，暂存区以及与reset的差异都放到工作区，然后清空暂存区。因此执行后，只要有所差异，文件都会变成红色，变得难以区分。</p>
+<p>一般情况下，我们使用soft模式，既能保留暂存区，又能reset到某个分支。</p>
+<p>五、代码暂存<br>
+当我们在当前分支工作时，不得已需要切换到其他分支处理事情而不想commit时（如果commit多了，会污染log），可以使用git stash 将那些数据都暂存到Git提供的栈中。用法很简单～</p>
+<p>git stash<br>
+暂存修改过的代码，保存在Git栈中，然后将工作区还原成上一次commit的内容。</p>
+<p>MacBook-Pro:young eleme$ git stash<br>
+保存工作目录和索引状态 WIP on wuya: 82371a5 上一次commit写的message<br>
+git stash list<br>
+显示之前压栈的所有记录。</p>
+<p>MacBook-Pro:young eleme$ git stash list<br>
+stash@{0}: WIP on aaa: 82371a5 上一次commit写的message<br>
+git stash clear<br>
+清空Git栈。</p>
+<p>git stash apply<br>
+从Git栈中读取上一次暂存的那些代码，恢复工作区。</p>
+<p>MacBook-Pro:young eleme$ git stash apply<br>
+位于分支 wuya<br>
+您的分支与上游分支 'origin/wuya' 一致。</p>
+<p>尚未暂存以备提交的变更：<br>
+（使用 &quot;git add &lt;文件&gt;...&quot; 更新要提交的内容）<br>
+（使用 &quot;git checkout -- &lt;文件&gt;...&quot; 丢弃工作区的改动）</p>
+<pre><code>    修改：     src/main/java/com/young/test/test1.java
+</code></pre>
+<p>修改尚未加入提交（使用 &quot;git add&quot; 和/或 &quot;git commit -a&quot;）<br>
+最后<br>
+希望大家的Git越用越6，如有疑问，欢迎评论。<br>
+然后...卑微地求一波赞</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/">
+                <h3 class="post-title">
+                  2019-D2晚会前端分享记录-语雀热门文章
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="http://toolman.live/images/avatar.png?v=1588411603922" class="no-responsive avatar">
+    <div class="text-muted">既知才疏，又然学浅</div>
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="http://toolman.live/post/zi-kong-li-ji-chai-de-ren-ru-he-zi-jiu/">自控力极差的人如何自救？</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/da-jia-du-shi-ru-he-shua-leetcode-de/">大家都是如何刷 LeetCode 的？</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/ru-he-chang-shi-jian-gao-xiao-xue-xi/">如何长时间高效学习？</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/huan-ying-jin-ru-2020-shu-ju-ke-shi-hua-zhi-neng-yan-fa-shi-dai/">欢迎进入 2020 数据可视化智能研发时代</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang/">不做22:59下班的人-语雀热门文章</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/">体验科技与好的产品-语雀热门文章</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/ji-qi-qiang-lie-tui-jian-46-tiao-shi-yong-de-ren-sheng-jing-yan/">极其强烈推荐46条实用的人生经验</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/shou-si-gitgao-bie-mang-mu-ji-yi/">手撕Git，告别盲目记忆</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/">2019-D2晚会前端分享记录-语雀热门文章</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="http://toolman.live/post/js-mian-shi-ti-ji-chu/">JS面试题-基础</a>
+            </li>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="http://toolman.live/tag/tTBmKiGoj/" class="badge secondary">
+          语雀
+        </a>
+      
+        <a href="http://toolman.live/tag/wIW593qVj/" class="badge secondary">
+          面试
+        </a>
+      
+        <a href="http://toolman.live/tag/u1jSvmmAc/" class="badge secondary">
+          JavaScript
+        </a>
+      
+        <a href="http://toolman.live/tag/DWroS-82n/" class="badge secondary">
+          前端
+        </a>
+      
+        <a href="http://toolman.live/tag/UiZeWWb1E/" class="badge ">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="http://beian.miit.gov.cn" target="_blank">粤ICP备19151846号</a> | <a class="rss" href="http://toolman.live/atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>
