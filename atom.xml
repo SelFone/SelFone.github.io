@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://toolman.live</id>
     <title>ToolMan</title>
-    <updated>2020-05-02T08:42:54.001Z</updated>
+    <updated>2020-05-02T08:52:25.967Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://toolman.live"/>
     <link rel="self" href="http://toolman.live/atom.xml"/>
@@ -10,6 +10,48 @@
     <logo>http://toolman.live/images/avatar.png</logo>
     <icon>http://toolman.live/favicon.ico</icon>
     <rights>All rights reserved 2020, ToolMan</rights>
+    <entry>
+        <title type="html"><![CDATA[欢迎进入 2020 数据可视化智能研发时代]]></title>
+        <id>http://toolman.live/post/huan-ying-jin-ru-2020-shu-ju-ke-shi-hua-zhi-neng-yan-fa-shi-dai/</id>
+        <link href="http://toolman.live/post/huan-ying-jin-ru-2020-shu-ju-ke-shi-hua-zhi-neng-yan-fa-shi-dai/">
+        </link>
+        <updated>2020-05-02T08:51:08.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[体验科技与好的产品-语雀热门文章]]></title>
+        <id>http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/</id>
+        <link href="http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/">
+        </link>
+        <updated>2020-05-02T08:47:25.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[企业微信和钉钉在PK什么？-语雀热门文章]]></title>
+        <id>http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/</id>
+        <link href="http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/">
+        </link>
+        <updated>2020-05-02T08:46:42.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[2019-D2晚会前端分享记录-语雀热门文章]]></title>
+        <id>http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/</id>
+        <link href="http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/">
+        </link>
+        <updated>2020-05-02T08:45:31.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[不做22:59下班的人-语雀热门文章]]></title>
+        <id>http://toolman.live/post/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang/</id>
+        <link href="http://toolman.live/post/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang/">
+        </link>
+        <updated>2020-05-02T08:43:25.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Git第一次提交代码教程]]></title>
+        <id>http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/</id>
+        <link href="http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/">
+        </link>
+        <updated>2020-05-02T08:40:49.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[第三届 SEE Conf 2020 视频回放 && PPT-语雀热门文章]]></title>
         <id>http://toolman.live/post/di-san-jie-see-conf-2020-shi-pin-hui-fang-and-ppt-yu-que-re-men-wen-zhang/</id>
@@ -41,25 +83,5 @@
         <link href="http://toolman.live/post/qian-kao-bei-he-shen-kao-bei/">
         </link>
         <updated>2020-04-30T02:30:11.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[JS 之 this和call、apply、bind]]></title>
-        <id>http://toolman.live/post/js-zhi-this-he-callapplybind/</id>
-        <link href="http://toolman.live/post/js-zhi-this-he-callapplybind/">
-        </link>
-        <updated>2020-04-30T02:29:50.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>http://toolman.live/post/hello-gridea/</id>
-        <link href="http://toolman.live/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></content>
     </entry>
 </feed>
