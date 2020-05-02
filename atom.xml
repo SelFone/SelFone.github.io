@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>http://toolman.live</id>
     <title>ToolMan</title>
-    <updated>2020-05-02T08:56:52.886Z</updated>
+    <updated>2020-05-02T09:01:41.205Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://toolman.live"/>
     <link rel="self" href="http://toolman.live/atom.xml"/>
@@ -18,27 +18,6 @@
         <updated>2020-05-02T08:51:08.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[体验科技与好的产品-语雀热门文章]]></title>
-        <id>http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/</id>
-        <link href="http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/">
-        </link>
-        <updated>2020-05-02T08:47:25.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[企业微信和钉钉在PK什么？-语雀热门文章]]></title>
-        <id>http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/</id>
-        <link href="http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/">
-        </link>
-        <updated>2020-05-02T08:46:42.000Z</updated>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[2019-D2晚会前端分享记录-语雀热门文章]]></title>
-        <id>http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/</id>
-        <link href="http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/">
-        </link>
-        <updated>2020-05-02T08:45:31.000Z</updated>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[不做22:59下班的人-语雀热门文章]]></title>
         <id>http://toolman.live/post/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang/</id>
         <link href="http://toolman.live/post/bu-zuo-2259-xia-ban-de-ren-yu-que-re-men-wen-zhang/">
@@ -46,22 +25,18 @@
         <updated>2020-05-02T08:43:25.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Git第一次提交代码教程]]></title>
-        <id>http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/</id>
-        <link href="http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/">
+        <title type="html"><![CDATA[体验科技与好的产品-语雀热门文章]]></title>
+        <id>http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/</id>
+        <link href="http://toolman.live/post/ti-yan-ke-ji-yu-hao-de-chan-pin-yu-que-re-men-wen-zhang/">
         </link>
-        <updated>2020-05-02T08:40:49.000Z</updated>
+        <updated>2020-05-01T08:47:25.000Z</updated>
     </entry>
     <entry>
-        <title type="html"><![CDATA[第三届 SEE Conf 2020 视频回放 && PPT-语雀热门文章]]></title>
-        <id>http://toolman.live/post/di-san-jie-see-conf-2020-shi-pin-hui-fang-and-ppt-yu-que-re-men-wen-zhang/</id>
-        <link href="http://toolman.live/post/di-san-jie-see-conf-2020-shi-pin-hui-fang-and-ppt-yu-que-re-men-wen-zhang/">
+        <title type="html"><![CDATA[2019-D2晚会前端分享记录-语雀热门文章]]></title>
+        <id>http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/</id>
+        <link href="http://toolman.live/post/2019-d2-wan-hui-qian-duan-fen-xiang-ji-lu-yu-que-re-men-wen-zhang/">
         </link>
-        <updated>2020-05-02T08:39:27.000Z</updated>
-        <summary type="html"><![CDATA[<p>会议介</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>会议介</p>
-]]></content>
+        <updated>2020-04-30T08:45:31.000Z</updated>
     </entry>
     <entry>
         <title type="html"><![CDATA[JS面试题-基础]]></title>
@@ -83,5 +58,26 @@
         <link href="http://toolman.live/post/qian-kao-bei-he-shen-kao-bei/">
         </link>
         <updated>2020-04-30T02:30:11.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[JS 之 this和call、apply、bind]]></title>
+        <id>http://toolman.live/post/js-zhi-this-he-callapplybind/</id>
+        <link href="http://toolman.live/post/js-zhi-this-he-callapplybind/">
+        </link>
+        <updated>2020-04-30T02:29:50.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Git第一次提交代码教程]]></title>
+        <id>http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/</id>
+        <link href="http://toolman.live/post/git-di-yi-ci-ti-jiao-dai-ma-jiao-cheng/">
+        </link>
+        <updated>2020-04-29T08:40:49.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[企业微信和钉钉在PK什么？-语雀热门文章]]></title>
+        <id>http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/</id>
+        <link href="http://toolman.live/post/qi-ye-wei-xin-he-ding-ding-zai-pk-shi-me-yu-que-re-men-wen-zhang/">
+        </link>
+        <updated>2020-04-28T08:46:42.000Z</updated>
     </entry>
 </feed>
