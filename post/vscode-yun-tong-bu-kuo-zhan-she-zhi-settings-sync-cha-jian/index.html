@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>浅拷贝和深拷贝 | ToolMan</title>
+<title>VSCode 云同步扩展设置 Settings Sync 插件 | ToolMan</title>
 <meta name="description" content="既知才疏，又然学浅">
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -81,42 +81,78 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>浅拷贝和深拷贝</h1>
+            <h1>VSCode 云同步扩展设置 Settings Sync 插件</h1>
             <p class="article-meta">
-              2020-04-30
-              
-                <a href="http://toolman.live/tag/u1jSvmmAc/" class="badge secondary">
-                  JavaScript
-                </a>
+              2020-05-03
               
             </p>
             
             <div class="post-content">
-              <p>知识基础：栈堆，基本数据类型与引用数据类型;<br>
-• 基本类型--名值存储在栈内存中<br>
-• 引用数据类型--名存在栈内存中，值存在于堆内存中，但是栈内存会提供一个引用的地址指向堆内存中的值<br>
-function deepClone(obj){<br>
-let objClone = Array.isArray(obj)?[]:{};<br>
-if(obj &amp;&amp; typeof obj===&quot;object&quot;){<br>
-for(let key in obj){<br>
-if(obj.hasOwnProperty(key)){<br>
-//判断ojb子元素是否为对象，如果是，递归复制<br>
-if(obj[key] &amp;&amp; typeof obj[key] ===&quot;object&quot;){<br>
-objClone[key] = deepClone(obj[key]);<br>
-}else{<br>
-//如果不是，简单复制<br>
-objClone[key] = obj[key];<br>
-}<br>
-}<br>
-}<br>
-}<br>
-return objClone;<br>
-}</p>
-<p>let a=[0,1,[2,3],4],<br>
-b=deepClone(a);<br>
-a[0]=1;<br>
-a[2][0]=1;<br>
-console.log(a,b);</p>
+              <p>关于 Settings Sync扩展：<br>
+Settings Sync可以同步你当前的VSCode配置环境，当你需要在其它的电脑工作时，您不用重头再来一遍。新机器登录一下就搞定了。再也不用折腾环境了。</p>
+<p>大致原理：使用GitHub Gist来同步多台计算机上的设置，代码段，主题，文件图标，启动，键绑定，工作区和扩展。</p>
+<p>环境版本：<br>
+Visual Studio Code 1.36</p>
+<p>Settings Sync 3.4.0</p>
+<p>教程分为</p>
+<p>初次使用 如何上传配置(#1)</p>
+<p>已有配置 直接下载(#2)</p>
+<p>初次使用：<br>
+在VSCode中点击扩展，搜索：Settings Sync 安装</p>
+<p>安装好扩展之后我们登录GitHub开通并创建一个Gist（代码片段管理服务）来保存你的环境配置。</p>
+<p>Let's to it</p>
+<p>登录你的Github 点击头像 进入Settings页面</p>
+<p>在Settings页面点击进入 Developer settings （开发者设置）再点击进入Personal access tokens （个人授权令牌）页面生成一个令牌 点击 Generate new token</p>
+<p>令牌的作用能帮助我们就在VSCode中使用自己的私有令牌访问自己的保存在Gist上的配置</p>
+<p>所以我们输入令牌备注，勾选Gist，点击生成。</p>
+<p>然后你就获得了自己的Gist专属访问令牌，你可以用记事本保存下来，待会并且未来你可能需要在另一台电脑下载你的配置 你同样需要使用到这个令牌。（截图中生成Token演示后删除，请自己生成）</p>
+<p>然后再次点击你的头像 点击进入-&gt;Gist页面 点击创建一个新Gist。</p>
+<p>输入创建的Gist描述和片段内容，保存即可。</p>
+<p>手动复制刚才创建的Gist仓库的ID：它显示在浏览器url最后一串字符串或者截图中第二个框gist冒号后面的字符串（如下图）把它保存在你的记事本中</p>
+<p>回到VSCode编辑器中 使用快捷键Ctrl+P 输入命令 &gt;sync 点击 同步：高级选项</p>
+<p>ps：如果有问题，可以点红框下面的 扩展设置重置 它不会清除你现有的扩展，只恢复初始sync的配置） 快捷键的用法是 Ctrl+P 输入命令：&gt;Sync: Reset Extension Settings</p>
+<p>然后选择同步：编辑配置设置(截图中文翻译错误)</p>
+<p>输入你在github上创建的gist token 记得使用Ctrl+S保存更改</p>
+<p>然后如下图进入Settings Sync扩展设置页面设置</p>
+<p>输入创建的Gist仓库ID 输入自动保存设置</p>
+<p>使用Settings Sync我们需要记住两个快捷键：</p>
+<p>Shift + Alt + U 将配置环境 扩展插件信息上传到云端</p>
+<p>Shift + Alt + D 下载云端的配置</p>
+<p>所以我们接着上一步 直接在VSCode中使用Shift + Alt + U</p>
+<p>Settings Sync扩展 会在输出区域提示 这里提示没有扩展别移除(因为第一次同步) 然后6个扩展被同步。</p>
+<p>你还可以在你的Gist仓库中查看，看看Settings Sync上传了什么</p>
+<p>已有配置 直接下载同步远端配置<br>
+假设我刚才是在用公司的电脑进行了一次初始化同步设置。现在我想起来我家里的电脑已经设置好了，而且安装的插件更多，有的插件我都忘记了名字。那么我只需要拉取家中Settings Sync配置中对应的Gist ID即可做到 公司和家中用的是同一套VSCode的配置。</p>
+<p>下面我们来实际操作一次。</p>
+<p>查看我们的Gist仓库，获取你想要拉取的Gist ID。截图中，红框中的就是昨晚我在家中最后同步的Gist配置了。点击进入 复制这个Gist ID</p>
+<p>更改Settings Sync中的Gist ID设置：</p>
+<p>快捷键Shift+Alt+D 下载配置</p>
+<p>同步成功 需要重启VSCode</p>
+<p>PS：这里可以思考一下，为什么第一次设置Settings Sync需要创建Token 这里就不需要设置Token了，其实你可以这么理解 Gist ID 它用来标记你的仓库号码 你可能有多个仓库 你的仓库大门用的都是刷脸验证（令牌Token验证），也就是说。Token你只需要创建一个对应Gist的Token即可(多个也可以) 它们都可以打开你的Token，因为在第之前我设置好了token，所以这里我只需要设置好Settings Sync 相应的仓库号码。就可以完成同步了。</p>
+<p>重启后看到同步到了我最常使用的这个Gist配置。一共有31个扩展（虽然很多，但VSCode使用依然顺滑）。</p>
+<p>总结：<br>
+使用Settings Sync 需要明白 Gist ID和Token ID他们的作用。配置好之后使用快捷键 Shift+Alt+U(上传)/D(下载)。</p>
+<p>对于在使用过程中出现的一些错误 可以简单三部曲：</p>
+<p>1、扩展设置重置<br>
+它不会清除你现有的扩展，只恢复初始sync的配置） 快捷键的用法是 Ctrl+P 输入命令：&gt;Sync: Reset Extension Settings</p>
+<p>2、更改Settings Sync配置文本<br>
+设置Token ID</p>
+<p>3、设置Gist ID<br>
+然后同步上传或者下载配置。</p>
+<p>后言：<br>
+为 (吃) 什 (我) 么 (安) 要 (利) 用 Visual Studio Code ：</p>
+<p>开源，免费，多语言支持(有中文)</p>
+<p>超全面的编程语言和各种文件格式支持 详见官网查询 https://code.visualstudio.com/</p>
+<p>集成git</p>
+<p>自定义配置 语法高亮 自动提示 代码补全 多种主题 配合插件扩展 可玩性极高</p>
+<p>智能提示强大</p>
+<p>前端界面友好，想不到的丝滑 并且是开箱即用的</p>
+<p>调试功能强大</p>
+<p>各种方便的快捷键</p>
+<p>强大的插件扩展（你想要的基本都有 各类语言代码提示\调试\更利于分辨好看的样式 等等插件） more：https://marketplace.visualstudio.com/</p>
+<p>下一期考虑写一篇介绍VSCode 必装 好用的 ★★五星★★插件 让人写代码也能上瘾</p>
+<p>Bye。</p>
+<p>原文链接：http://www.cnblogs.com/lychee/p/11214032.html</p>
 
             </div>
           </article>
@@ -127,9 +163,9 @@ console.log(a,b);</p>
               <div class="next">
                 下一篇
               </div>
-              <a href="http://toolman.live/post/js-zhi-this-he-callapplybind/">
+              <a href="http://toolman.live/post/da-jia-du-shi-ru-he-shua-leetcode-de/">
                 <h3 class="post-title">
-                  JS 之 this和call、apply、bind
+                  大家都是如何刷 LeetCode 的？
                 </h3>
               </a>
             </div>
@@ -260,7 +296,7 @@ console.log(a,b);</p>
           语雀
         </a>
       
-        <a href="http://toolman.live/tag/wIW593qVj/" class="badge success">
+        <a href="http://toolman.live/tag/wIW593qVj/" class="badge secondary">
           面试
         </a>
       
